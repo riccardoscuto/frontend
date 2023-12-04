@@ -3,9 +3,9 @@ import { Box, Checkbox, Flex, HStack, IconButton, Image, ListItem, SkeletonCircl
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
 
-const testoPrimaPagina = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-const testoPianta = "plant name"
-const testoCaratteristiche = "Plant stats"
+const HomepageText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+const PlantText = "plant name"
+const PlantInfo = "Plant stats"
 const arrayInfo = ["Level: 1", "Date: 04/12/2023", "Earnings: 20 ETH"]
 export default function Home() {
 	const { isConnected } = useAccount()
@@ -22,7 +22,7 @@ export default function Home() {
 							icon={<ArrowLeftIcon />}
 							onClick={() => { console.log("Change plant") }}
 						/>
-						<Text fontSize="22px" >{testoPianta}	</Text>
+						<Text fontSize="22px" >{PlantText}	</Text>
 						<IconButton
 							colorScheme='teal'
 							aria-label='Call Segun'
@@ -32,9 +32,9 @@ export default function Home() {
 						/>
 					</Flex>
 					<Flex justifyContent={"space-around"}>
-						<Image src="/home2.png" width="auto" height="400px" />
+						<Image src="/home2.png" width="auto" height="400px" marginRight="950px"/>
 						<Box>
-							<UnorderedList fontSize={32} marginTop={26}>
+							<UnorderedList fontSize={32} marginTop={36} marginLeft={-500} >
 								{
 									arrayInfo && arrayInfo.map((element, index, array) => {
 										return (
@@ -64,7 +64,7 @@ export default function Home() {
 					<Image src="/home1.png" height="500px" width="auto" />
 					<Box>
 
-						<Text fontSize="28px" height="330px" width="660px">{testoPrimaPagina}</Text>
+						<Text fontSize="28px" height="330px" width="660px">{HomepageText}</Text>
 
 					</Box>
 				</Flex>
