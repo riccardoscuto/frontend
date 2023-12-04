@@ -20,17 +20,16 @@ export default function Home() {
 							aria-label='Call Segun'
 							size='lg'
 							icon={<ArrowLeftIcon />}
-							onClick={()=>{console.log("Change plant")}}
+							onClick={() => { console.log("Change plant") }}
 						/>
-							<Text fontSize="22px" >{testoPianta}
+						<Text fontSize="22px" >{testoPianta}	</Text>
 						<IconButton
 							colorScheme='teal'
 							aria-label='Call Segun'
 							size='lg'
 							icon={<ArrowRightIcon />}
-							onClick={()=>{console.log("Change plant")}}
+							onClick={() => { console.log("Change plant") }}
 						/>
-						</Text>
 					</Flex>
 					<Flex justifyContent={"space-around"}>
 						<Image src="/home2.png" width="auto" height="400px" />
