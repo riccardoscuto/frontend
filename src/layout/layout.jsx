@@ -2,6 +2,8 @@ import { Flex, HStack } from "@chakra-ui/react";
 import { Outlet, Link as ReactRouterLink } from 'react-router-dom'
 import { Link as ChakraLink } from '@chakra-ui/react'
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import React from 'react';
+
 
 export default function Layout() {
 	return (
@@ -12,6 +14,9 @@ export default function Layout() {
 				</ChakraLink>
 				<ChakraLink as={ReactRouterLink} to='/about'>
 					About
+				</ChakraLink>
+				<ChakraLink as={ReactRouterLink} to='/redeem'>
+					Redeem
 				</ChakraLink>
 				<ConnectButton />
 			</Flex>
