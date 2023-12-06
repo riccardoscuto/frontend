@@ -1,58 +1,27 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
-import { Box, Checkbox, Flex, HStack, IconButton, Image, ListItem, SkeletonCircle, SkeletonText, TagRightIcon, Text, UnorderedList } from "@chakra-ui/react";
+import { Box, Button, Checkbox, Flex, HStack, IconButton, Image, ListItem, SkeletonCircle, SkeletonText, TagRightIcon, Text, UnorderedList, useDisclosure } from "@chakra-ui/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
+import ModalStatPlant from "../Components/StatPlant";
 
 const HomepageText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 const PlantText = "plant name"
 const PlantInfo = "Plant stats"
 const arrayInfo = ["Level: 1", "Date: 04/12/2023", "Earnings: 20 ETH"]
+const plantImg = "/home2.png"
+
 export default function Home() {
 	const { isConnected } = useAccount()
+	const { isOpen, onOpen, onClose } = useDisclosure()
 
 	if (isConnected) {
+
 		return (
+
 			<>
-				<Box>
-					<Flex justifyContent={"center"}>
-						<IconButton
-							colorScheme='teal'
-							aria-label='Call Segun'
-							size='lg'
-							icon={<ArrowLeftIcon />}
-							onClick={() => { console.log("Change plant") }}
-						/>
-						<Text fontSize="22px" >{PlantText}	</Text>
-						<IconButton
-							colorScheme='teal'
-							aria-label='Call Segun'
-							size='lg'
-							icon={<ArrowRightIcon />}
-							onClick={() => { console.log("Change plant") }}
-						/>
-					</Flex>
-					<Flex justifyContent={"space-around"}>
-						<Image src="/home2.png" width="auto" height="400px" marginRight="950px"/>
-						<Box>
-							<UnorderedList fontSize={32} marginTop={36} marginLeft={-500} >
-								{
-									arrayInfo && arrayInfo.map((element, index, array) => {
-										return (
-											<ListItem key={index}>{element}</ListItem>
-										)
+				< ModalStatPlant plantImg={plantImg} plantText={PlantText} arrayInfo={arrayInfo} isOpen={isOpen} onClose={onClose} />
 
-									})
-								}
-
-							</UnorderedList>
-
-
-						</Box>
-					</Flex>
-				</Box>
-
-
-
+				<Image onClick={onOpen} src={plantImg} width={250} height={250} />
 			</>
 		)
 
