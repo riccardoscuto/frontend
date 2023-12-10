@@ -15,9 +15,7 @@ export default function Layout() {
 				<ChakraLink as={ReactRouterLink} to='/about'>
 					About
 				</ChakraLink>
-				<ChakraLink as={ReactRouterLink} to='/redeem'>
-					Redeem
-				</ChakraLink>
+				
 				<ConnectButton />
 			</Flex>
 			<Outlet />
