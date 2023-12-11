@@ -1,7 +1,8 @@
-import { Box, Button, Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
 import ModalImg from "../Components/StatPlant";
+import { Card, CardBody, CardFooter } from '@chakra-ui/react'
 import { Link as ChakraLink } from '@chakra-ui/react';
 import { Link as ReactRouterLink } from 'react-router-dom';
 import mockup from '../mockup/mockup'
@@ -23,29 +24,48 @@ export default function Home() {
 
 
 			<>
-				<Box marginLeft={250} marginRight={250}>
-					<Flex my={20} width="100%" backgroundColor={"black"}>
-						{
-							mockup && mockup.map((element, index) => {
-								return (
-									<>
-									<ModalImg img={element.img} info={element.info} text={element.text} key={index}/>
-										
-									</>
-								)
-							})
+				<Container maxW="container.xl" height="100%">
+					<Flex
+						flexDirection="row"
+						my={20}
+						width="100%"
+						overflowX="auto"
+						scrollBehavior="smooth"
+						scrollSnapType="x mandatory"
+						css={
+							//hide scrollbar
+							{
+								"scrollbarWidth": "none",
+								"msOverflowStyle": "none",
+								"&::-webkit-scrollbar": {
+									width: "0px",
+									background: "transparent",
+									display: "none"
+								}
+							}
 						}
 
-
-
+					>
+						{mockup &&
+							mockup.map((element, index) => (
+								<Card key={index} m={2} borderRadius="8px" overflow="hidden" flex="0 0 auto">
+									<CardBody backgroundColor="teal.800">
+										<ModalImg height="100%" width="100px" img={element.img} info={element.info} text={element.text} />
+									</CardBody>
+									<CardFooter>
+										<Text fontSize="16px" color="black">
+											{element.text}
+										</Text>
+									</CardFooter>
+								</Card>
+							))}
 					</Flex>
 					<Button>
-						<ChakraLink as={ReactRouterLink} to='/redeem'>
+						<ChakraLink as={ReactRouterLink} to="/redeem">
 							Redeem
 						</ChakraLink>
 					</Button>
-				</Box>
-
+				</Container>
 
 
 			</>
@@ -54,22 +74,26 @@ export default function Home() {
 	}
 	else return (
 
-		<Box marginLeft={250} marginRight={250}>
-			<Flex justifyContent={"space-around"}>
-				<Image src="/home1.png" height="500px" width="auto" />
-				<Box>
 
-					<Text fontSize="28px" height="330px" width="660px">{HomepageText}</Text>
-
-				</Box>
-			</Flex>
-			<Flex justifyContent={"center"} marginTop={"64"}><ConnectButton></ConnectButton></Flex>
-		</Box>
-
-
-
-
-
+		<Container maxW="container.xl" height="100%">
+			<Box mt={4}>
+				<Card>
+					<CardBody>
+						<Flex gap={10} justify="center">
+							<Image src="/home1.png" height="auto" width="50%" />
+							<Box>
+								<Text fontSize="24px" height="100%" width="100%">
+									{HomepageText}
+								</Text>
+							</Box>
+						</Flex>
+						<Flex justifyContent="center" marginTop={50}>
+							<ConnectButton />
+						</Flex>
+					</CardBody>
+				</Card>
+			</Box>
+		</Container >
 
 	);
 }

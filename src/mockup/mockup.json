@@ -41,5 +41,29 @@
             "Earnings: 2600000 ETH"
         ],
         "img": "/home2.png"
+    }, {
+        "text": "Lorem ipsum dolor sit amet, consectetur a",
+        "info": [
+            "Level: 1",
+            "Date: 04/12/2023",
+            "Earnings: 2600000 ETH"
+        ],
+        "img": "/home2.png"
+    }, {
+        "text": "Lorem ipsum dolor sit amet, consectetur a",
+        "info": [
+            "Level: 1",
+            "Date: 04/12/2023",
+            "Earnings: 2600000 ETH"
+        ],
+        "img": "/home2.png"
+    }, {
+        "text": "Lorem ipsum dolor sit amet, consectetur a",
+        "info": [
+            "Level: 1",
+            "Date: 04/12/2023",
+            "Earnings: 2600000 ETH"
+        ],
+        "img": "/home2.png"
     }
 ]

@@ -8,14 +8,31 @@ import React from 'react';
 export default function Layout() {
 	return (
 		<>
-			<Flex justifyContent="space-between" backgroundColor="grey">
-				<ChakraLink as={ReactRouterLink} to='/'>
-					Home
-				</ChakraLink>
-				<ChakraLink as={ReactRouterLink} to='/about'>
-					About
-				</ChakraLink>
-				
+			<Flex
+				justifyContent="space-between"
+				alignItems="center"
+				padding={4}
+				backgroundColor="teal.700"
+				color="white"
+				boxShadow="md"
+			>
+				<HStack spacing={10}>
+					<ChakraLink
+						as={ReactRouterLink}
+						to="/"
+						fontSize="xl"
+						fontWeight="bold"
+					>
+						Home
+					</ChakraLink>
+					<ChakraLink
+						as={ReactRouterLink}
+						to="/about"
+						fontSize="xl"
+						fontWeight="bold"				>
+						About
+					</ChakraLink>
+				</HStack>
 				<ConnectButton />
 			</Flex>
 			<Outlet />

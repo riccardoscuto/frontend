@@ -1,7 +1,7 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons"
 import { Box, Flex, IconButton, Image, ListItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, UnorderedList, useDisclosure } from "@chakra-ui/react"
 
-export  function ModalStatPlant({ isOpen, onClose, plantImg, plantText, arrayInfo }) {
+export function ModalStatPlant({ isOpen, onClose, plantImg, plantText, arrayInfo }) {
     return (
 
         <Modal isOpen={isOpen} onClose={onClose} size="lg">
@@ -17,11 +17,11 @@ export  function ModalStatPlant({ isOpen, onClose, plantImg, plantText, arrayInf
 
     )
 }
-export default function ModalImg({info, img, text }) {
+export default function ModalImg({ info, img, text }) {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
         <>
-            <Image onClick={onOpen} src={img} width={250} height={250} />
+            <Image onClick={onOpen} src={img} width="100%" height="250px" />
             < ModalStatPlant plantImg={img} plantText={text} arrayInfo={info} isOpen={isOpen} onClose={onClose} />
         </>
     )
