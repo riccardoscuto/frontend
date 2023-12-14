@@ -27,10 +27,10 @@ export default function Layout() {
 					</ChakraLink>
 					<ChakraLink
 						as={ReactRouterLink}
-						to="/about"
+						to="/profile"
 						fontSize="xl"
 						fontWeight="bold"				>
-						About
+						Profile
 					</ChakraLink>
 				</HStack>
 				<ConnectButton />

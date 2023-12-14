@@ -1,7 +1,6 @@
 import { Box, Button, Input, ListItem, UnorderedList, VStack, Flex, Spacer, Text, Center } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useAccount } from "wagmi";
-import * as XLSX from 'xlsx';
 
 const RedeemCode = () => {
     const { isConnected } = useAccount()
@@ -36,13 +35,7 @@ const RedeemCode = () => {
         }
     };
 
-    const exportToXLS = () => {
-        const worksheet = XLSX.utils.json_to_sheet(redeemedCodes.map((code) => ({ 'Code': code })));
-        const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, 'Redeemed Codes');
-        XLSX.writeFile(workbook, 'redeemed_codes.xlsx');
-    };
-
+    const redeemedCount = redeemedCodes.length; // Conteggio dei codici riscattati
 
     if (isConnected)
         return (
@@ -61,13 +54,12 @@ const RedeemCode = () => {
                                 <ListItem key={index}>{code}</ListItem>
                             ))}
                         </UnorderedList>
-
-                        <Flex width="100%" justifyContent={"center"}>
-                            <Button  colorScheme='blue' onClick={exportToXLS} ml={2}>Export to XLS</Button>
-                        </Flex>
                     </VStack>
                 </Flex>
-            </Box >
+                <Box mt={4} p={3} bg="gray.100" textAlign="center">
+                    <Text>Number of Redeemed Codes: {redeemedCount}</Text>
+                </Box>
+            </Box>
         );
     else return (
         <Flex justifyContent={"center"} >
