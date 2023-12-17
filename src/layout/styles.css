@@ -2,3 +2,12 @@ body {
     background-color: #333B6A;
     color: #B7FEAE;
 }
+
+.splide:not(.is-overflow) .splide__arrows {
+    display: none !important;
+
+}
+
+.splide:not(.is-overflow) .splide__slide:last-child {
+    margin: 0 !important;
+}

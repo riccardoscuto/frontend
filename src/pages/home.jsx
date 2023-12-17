@@ -6,6 +6,7 @@ import { Card, CardBody, CardFooter } from '@chakra-ui/react'
 import { Link as ChakraLink } from '@chakra-ui/react';
 import { Link as ReactRouterLink } from 'react-router-dom';
 import mockup from '../mockup/mockup'
+import { Splide, SplideSlide } from '@splidejs/react-splide';
 
 
 
@@ -24,42 +25,39 @@ export default function Home() {
 
 
 			<>
-				<Container maxW="container.xl" height="100%">
-					<Flex
-						flexDirection="row"
-						my={20}
-						width="100%"
-						overflowX="auto"
-						scrollBehavior="smooth"
-						scrollSnapType="x mandatory"
-						css={
-							//hide scrollbar
-							{
-								"scrollbarWidth": "none",
-								"msOverflowStyle": "none",
-								"&::-webkit-scrollbar": {
-									width: "0px",
-									background: "transparent",
-									display: "none"
-								}
-							}
-						}
+				<Container maxW="full" centerContent height="100%">
 
-					>
+					<Splide aria-label="Images"
+						options={{
+							rewind: true,
+							width: "70%",
+							perPage: 3,
+							gap: '1rem',
+							rewindByDrag: true,
+							drag: 'free',
+							snap: true,
+							keyboard: 'global',
+							padding: 10,
+							fixedWidth: 300,
+						}}>
+
 						{mockup &&
 							mockup.map((element, index) => (
-								<Card key={index} m={2} borderRadius="8px" overflow="hidden" flex="0 0 auto">
-									<CardBody backgroundColor="teal.800">
-										<ModalImg height="100%" width="100px" img={element.img} info={element.info} text={element.text} />
-									</CardBody>
-									<CardFooter>
-										<Text fontSize="16px" color="black">
-											{element.text}
-										</Text>
-									</CardFooter>
-								</Card>
+								<SplideSlide key={index}>
+									<Card m={2} borderRadius="8px" overflow="hidden" flex="0 0 auto">
+										<CardBody backgroundColor="teal.800">
+											<ModalImg height="100%" width="100px" img={element.img} info={element.info} text={element.text} />
+										</CardBody>
+										<CardFooter>
+											<Text fontSize="16px" color="black">
+												{element.text}
+											</Text>
+										</CardFooter>
+									</Card>
+								</SplideSlide>
 							))}
-					</Flex>
+					</Splide>
+
 					<Button>
 						<ChakraLink as={ReactRouterLink} to="/redeem">
 							Redeem
