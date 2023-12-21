@@ -32,6 +32,13 @@ export default function Layout() {
 						fontWeight="bold"				>
 						Profile
 					</ChakraLink>
+					<ChakraLink
+						as={ReactRouterLink}
+						to="/review"
+						fontSize="xl"
+						fontWeight="bold"	>
+						Review
+					</ChakraLink>
 				</HStack>
 				<ConnectButton />
 			</Flex>

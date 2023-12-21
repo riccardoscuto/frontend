@@ -1,9 +1,10 @@
-import { ChakraProvider, Box } from '@chakra-ui/react';
+import { ChakraProvider, Box, Text } from '@chakra-ui/react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/home';
 import Profile from './pages/profile';
 import Redeem from './pages/redeem';
 import Layout from './layout/layout';
+import Review from './pages/review';
 import '@splidejs/splide/css/sea-green';
 
 
@@ -15,6 +16,9 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="profile" element={<Profile />} />
           <Route path="redeem" element={<Redeem />} />
+          <Route path="review" element={<Review />} />
+          <Route path="*" element={<Text> 404</Text> } />
+
         </Route>
       </Routes>
     </Box>
