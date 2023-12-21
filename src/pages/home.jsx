@@ -10,7 +10,7 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 
 
 
-const HomepageText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+const HomepageText = "Unlock a world of growth and rewards! Leave feedback for your exclusive Febaval codes.\n\nClaim it, earn feed tokens, and cultivate virtual plants. Sign up, mint your sprout, and earn value tokens for exciting rewards.\n\nYour journey to extraordinary interactions starts here!"
 const PlantText = "plant name"
 const arrayInfo = ["Level: 1", "Date: 04/12/2023", "Earnings: 20 ETH"]
 const plantImg = "/home2.png"
@@ -84,7 +84,7 @@ export default function Home() {
 						<Flex gap={10} justify="center">
 							<Image src="/home1.png" height="auto" width="50%" />
 							<Box>
-								<Text fontSize="24px" height="100%" width="100%">
+								<Text whiteSpace={"pre-line"} fontSize="24px" height="100%" width="100%">
 									{HomepageText}
 								</Text>
 							</Box>
