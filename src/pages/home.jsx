@@ -57,12 +57,16 @@ export default function Home() {
 								</SplideSlide>
 							))}
 					</Splide>
-
-					<Button>
-						<ChakraLink as={ReactRouterLink} to="/redeem">
-							Redeem
-						</ChakraLink>
-					</Button>
+					<Flex width="15%" justifyContent={"space-between"}>
+						<Button>
+							<ChakraLink as={ReactRouterLink} to="/redeem">
+								Redeem
+							</ChakraLink>
+						</Button>
+						<Button >
+							Feeds
+						</Button>
+					</Flex>
 				</Container>
 
 

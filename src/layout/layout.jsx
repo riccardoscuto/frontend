@@ -12,7 +12,7 @@ export default function Layout() {
 				justifyContent="space-between"
 				alignItems="center"
 				padding={4}
-				backgroundColor="teal.700"
+				bgGradient='linear(to-l, #333B6A,  #B7FEAE)'
 				color="white"
 				boxShadow="md"
 			>

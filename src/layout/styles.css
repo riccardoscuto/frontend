@@ -5,7 +5,6 @@ body {
 
 .splide:not(.is-overflow) .splide__arrows {
     display: none !important;
-
 }
 
 .splide:not(.is-overflow) .splide__slide:last-child {
