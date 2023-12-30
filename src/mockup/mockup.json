@@ -1,97 +1,97 @@
-[{
-    "text": "1",
-    "info": [
-        "Level: 1",
-        "Date: 04/12/2023",
-        "Earnings: 20 ETH"
-    ],
-    "img": "/home2.png"
-}, {
-    "text": "2",
-    "info": [
-        "Level: 1",
-        "Date: 04/12/2023",
-        "Earnings: 5 ETH"
-    ],
-    "img": "/home2.png"
-}, {
-    "text": "3",
-    "info": [
-        "Level: 1",
-        "Date: 04/12/2023",
-        "Earnings: 10 ETH"
-    ],
-    "img": "/home2.png"
-}, {
-    "text": "4",
-    "info": [
-        "Level: 1",
-        "Date: 04/12/2023",
-        "Earnings: 20 ETH"
-    ],
-    "img": "/home2.png"
-}, {
-    "text": "5",
-    "info": [
-        "Level: 1",
-        "Date: 04/12/2023",
-        "Earnings: 20 ETH"
-    ],
-    "img": "/home2.png"
-}, {
-    "text": "6",
-    "info": [
-        "Level: 1",
-        "Date: 04/12/2023",
-        "Earnings: 20 ETH"
-    ],
-    "img": "/home2.png"
-}, {
-    "text": "7",
-    "info": [
-        "Level: 1",
-        "Date: 04/12/2023",
-        "Earnings: 20 ETH"
-    ],
-    "img": "/home2.png"
-}, {
-    "text": "8",
-    "info": [
-        "Level: 1",
-        "Date: 04/12/2023",
-        "Earnings: 20 ETH"
-    ],
-    "img": "/home2.png"
-}, {
-    "text": "9",
-    "info": [
-        "Level: 1",
-        "Date: 04/12/2023",
-        "Earnings: 20 ETH"
-    ],
-    "img": "/home2.png"
-}, {
-    "text": "10",
-    "info": [
-        "Level: 1",
-        "Date: 04/12/2023",
-        "Earnings: 20 ETH"
-    ],
-    "img": "/home2.png"
-}, {
-    "text": "11",
-    "info": [
-        "Level: 1",
-        "Date: 04/12/2023",
-        "Earnings: 20 ETH"
-    ],
-    "img": "/home2.png"
-}, {
-    "text": "12",
-    "info": [
-        "Level: 1",
-        "Date: 04/12/2023",
-        "Earnings: 20 ETH"
-    ],
-    "img": "/home2.png"
-}]
+[ {
+        "text": "1",
+        "info": [
+            "Level: 1",
+            "Date: 04/12/2023",
+            "Earnings: 20 ETH"
+        ],
+        "img": "/public/plant_lv1.webp"
+    }, {
+        "text": "2",
+        "info": [
+            "Level: 2",
+            "Date: 04/12/2023",
+            "Earnings: 5 ETH"
+        ],
+        "img": "/public/plant_lv2.webp"
+    }, {
+        "text": "3",
+        "info": [
+            "Level: 3",
+            "Date: 04/12/2023",
+            "Earnings: 10 ETH"
+        ],
+        "img": "/public/plant_lv3.webp"
+    }, {
+        "text": "4",
+        "info": [
+            "Level: 4",
+            "Date: 04/12/2023",
+            "Earnings: 20 ETH"
+        ],
+        "img": "/public/plant_lv4.webp"
+    }, {
+        "text": "5",
+        "info": [
+            "Level: 5",
+            "Date: 04/12/2023",
+            "Earnings: 20 ETH"
+        ],
+        "img": "/public/plant_lv5.webp"
+    }, {
+        "text": "6",
+        "info": [
+            "Level: 1",
+            "Date: 04/12/2023",
+            "Earnings: 20 ETH"
+        ],
+        "img": "/home2.png"
+    }, {
+        "text": "7",
+        "info": [
+            "Level: 1",
+            "Date: 04/12/2023",
+            "Earnings: 20 ETH"
+        ],
+        "img": "/home2.png"
+    }, {
+        "text": "8",
+        "info": [
+            "Level: 1",
+            "Date: 04/12/2023",
+            "Earnings: 20 ETH"
+        ],
+        "img": "/home2.png"
+    }, {
+        "text": "9",
+        "info": [
+            "Level: 1",
+            "Date: 04/12/2023",
+            "Earnings: 20 ETH"
+        ],
+        "img": "/home2.png"
+    }, {
+        "text": "10",
+        "info": [
+            "Level: 1",
+            "Date: 04/12/2023",
+            "Earnings: 20 ETH"
+        ],
+        "img": "/home2.png"
+    }, {
+        "text": "11",
+        "info": [
+            "Level: 1",
+            "Date: 04/12/2023",
+            "Earnings: 20 ETH"
+        ],
+        "img": "/home2.png"
+    }, {
+        "text": "12",
+        "info": [
+            "Level: 1",
+            "Date: 04/12/2023",
+            "Earnings: 20 ETH"
+        ],
+        "img": "/home2.png"
+    } ]
