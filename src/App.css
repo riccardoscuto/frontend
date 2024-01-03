@@ -50,17 +50,24 @@
 
 .level5 {
     --border-angle: 0turn;
-    --border-size: 1px;
-    background-image: conic-gradient(from var(--border-angle), transparent 20%, gold, rgb(123, 23, 185));
-    border-radius: 8px;
+    --border-size: 5px;
+    background: conic-gradient(from var(--border-angle),
+            #fff,
+            #fff 50%,
+            #fff),
+        conic-gradient(from var(--border-angle), darkorchid 0%,
+            tomato 50%,
+            gold 100%);
     background-size: calc(100% - (var(--border-size) * 2)) calc(100% - (var(--border-size) * 2)),
         cover;
     background-position: center center;
     background-repeat: no-repeat;
 
-    animation: bg-spin 3s linear infinite;
+    animation: bg-spin 8s linear infinite;
 
 }
+
+
 
 @property --border-angle {
     syntax: "<angle>";
@@ -72,19 +79,5 @@
 @keyframes bg-spin {
     to {
         --border-angle: 1turn;
-    }
-}
-
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
     }
 }

@@ -1,4 +1,4 @@
-import { Button, Checkbox, CheckboxGroup, Image, ListItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack, useDisclosure } from "@chakra-ui/react";
+import { Button, Checkbox, CheckboxGroup, Image, Card, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack, useDisclosure } from "@chakra-ui/react";
 
 
 export default function MultiFeed({ mokupInfo }) {
@@ -15,14 +15,16 @@ export default function MultiFeed({ mokupInfo }) {
                     <ModalCloseButton />
                     <ModalBody>
                         <CheckboxGroup colorScheme='green' >
-                            <Stack spacing={[1, 5]} direction={['row', 'column']}>
+                            <Stack spacing={[1, 3]} direction={['row', 'column']}>
                                 {
                                     mokupInfo && mokupInfo.map((element, index) => {
                                         return (
-                                            <Checkbox value={element.text} key={index}>
-                                                <Image width="40px" src={element.img} />
-                                                {element.text + " " + element.info[0]}
-                                            </Checkbox>
+                                            <Card key={index} padding={2} >
+                                                <Checkbox value={element.text} >
+                                                    <Image width="40px" src={element.img} />
+                                                    {element.text + " " + element.info[0]}
+                                                </Checkbox>
+                                            </Card>
                                         )
                                     })
                                 }

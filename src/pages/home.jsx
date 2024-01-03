@@ -22,7 +22,7 @@ export default function Home() {
 					<Splide aria-label="Images"
 						options={{
 							rewind: true,
-							width: "70%",
+							width: "63%",
 							perPage: 3,
 							gap: '1rem',
 							rewindByDrag: true,
