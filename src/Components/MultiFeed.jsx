@@ -7,11 +7,11 @@ export default function MultiFeed({ mokupInfo }) {
 
     return (
         <>
-            <Button onClick={onOpen}>Testo </Button>
+            <Button onClick={onOpen}>Multiple Feed </Button>
             <Modal isOpen={isOpen} onClose={onClose} size="lg">
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Testo</ModalHeader>
+                    <ModalHeader>Choose the plants to feed</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
                         <CheckboxGroup colorScheme='green' >

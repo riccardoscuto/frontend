@@ -2,18 +2,38 @@ import { useState } from 'react';
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import { Box, Button, Flex, IconButton, Image, ListItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, UnorderedList, useDisclosure } from "@chakra-ui/react";
 import React from "react";
+import { useWrite } from '../hook/useWrite';
 
 
 export default function ModalImg({ info, img, text }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const levelUp = () => {
+    const { write, error, prepareError, isError, isPrepareError } = useWrite({
+        abi: [{
+            "inputs": [],
+            "name": "unpause",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        }],
+        address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        args: [],
+        enabled: true,
+        functionName: "unpause",
+        value: BigInt(0)
+    });
+    const levelUp = async () => {
         console.log("Level Up");
+        console.log(error, prepareError);
+        await write?.();
+        
     };
 
     return (
         <>
             <Image onClick={onOpen} src={img} width="100%" height="250px" />
             <ModalStatPlant plantImg={img} plantText={text} arrayInfo={info} isOpen={isOpen} onClose={onClose} levelUp={levelUp} />
+            {isError && <h1>Error</h1>}
+            {isPrepareError && <h1>Prepare Error</h1>}
         </>
     );
 }

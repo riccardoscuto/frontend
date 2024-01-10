@@ -16,17 +16,14 @@ import { extendTheme, ChakraProvider } from '@chakra-ui/react';
 import colors from "./constants/colors";
 //Import for component
 import App from './App';
+import { publicProvider } from 'wagmi/providers/public';
+
 
 //config chain for wagmi
 const { chains, publicClient } = configureChains(
-	[mainnet, hardhat],
+	[mainnet],
 	[
-		jsonRpcProvider({
-			rpc: () => ({
-				http: `http://127.0.0.1:8545/`,
-				webSocket: `wss://127.0.0.1:8545/`,
-			})
-		})
+		publicProvider()
 	]
 );
 const { connectors } = getDefaultWallets({

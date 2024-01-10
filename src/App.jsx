@@ -18,7 +18,6 @@ export default function App() {
           <Route path="redeem" element={<Redeem />} />
           <Route path="review" element={<Review />} />
           <Route path="*" element={<Text> 404</Text> } />
-
         </Route>
       </Routes>
     </Box>
