@@ -39,28 +39,53 @@ const RedeemCode = () => {
 
     if (isConnected)
         return (
-            <Box marginLeft={250} marginRight={250}>
-                <Text textAlign="center" fontSize="xl" mb={4}>Redeem a code</Text>
-                <Flex align="center" mb={4}>
-                    <Input flex="1" variant='filled' placeholder='' type="text" value={inputCode} onChange={(e) => setInputCode(e.target.value)} size="sm" />
-                    <Button colorScheme='yellow' onClick={handleRedeem} size="md">Redeem</Button>
+            <Box mx={[4, 8, 16]} my={8}>
+                <Text textAlign="center" fontSize={['md', 'lg', 'xl']} mb={4} fontWeight={"bold"}>
+                    Redeem a code
+                </Text>
+                <Flex direction={['column', 'row']} align="center" mb={4}>
+                    <Input
+                        flex="1"
+                        variant="filled"
+                        placeholder=""
+                        type="text"
+                        value={inputCode}
+                        onChange={(e) => setInputCode(e.target.value)}
+                        size="sm"
+                        mb={[4, 0]}
+                    />
+                    <Button
+                        colorScheme="yellow"
+                        onClick={handleRedeem}
+                        size={['md', 'lg']}
+                        ml={[0, 4]}
+                    >
+                        Redeem
+                    </Button>
                 </Flex>
-                {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
-                <Flex width="100%">
-                    <VStack width="100%" align="start" mt={4} textAlign="center">
-                        <h2 fontSize="2xl" mb={2}>History</h2>
-                        <UnorderedList styleType="disc" pl={4} fontSize="lg">
-                            {redeemedCodes.map((code, index) => (
-                                <ListItem key={index}>{code}</ListItem>
-                            ))}
-                        </UnorderedList>
-                    </VStack>
-                </Flex>
+                {error && (
+                    <Text style={{ color: 'red', textAlign: 'center' }} mb={4}>
+                        {error}
+                    </Text>
+                )}
+                <VStack width="100%" align="center" mt={10} textAlign="center">
+                    <Text fontSize={['lg', 'xl']} mb={0} fontWeight={"bold"}>
+                        History
+                    </Text>
+                    <UnorderedList styleType="disc" pl={4} fontSize={['md', 'lg']}>
+                        {redeemedCodes.map((code, index) => (
+                            <ListItem key={index}>{code}</ListItem>
+                        ))}
+                    </UnorderedList>
+                </VStack>
                 <Box mt={4} p={3} bg="gray.100" textAlign="center">
-                    <Text>Number of Redeemed Codes: {redeemedCount}</Text>
+                    <Text fontSize={['sm', 'md']}>
+                        Number of Redeemed Codes: {redeemedCount}
+                    </Text>
                 </Box>
             </Box>
         );
+
     else return (
         <Flex justifyContent={"center"} >
             <h1>Login required</h1>

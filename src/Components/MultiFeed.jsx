@@ -26,7 +26,7 @@ export default function MultiFeed({ mokupInfo }) {
     },
         [])
 
-    const submit =() => {write?.();}
+    const submit = () => { write?.(); }
     const selectOnePlant = (index) => {
         const aux = arraySelected;
         aux[index] = !aux[index];
@@ -45,33 +45,34 @@ export default function MultiFeed({ mokupInfo }) {
                     <ModalHeader>Choose the plants to feed</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-
-                        <Stack spacing={[1, 3]} direction={['row', 'column']}>
-                            <Card key={-1} padding={2} >
-                                <Button onClick={selectAll} >
-                                    Select All
-                                </Button>
-                                <Button onClick={submit}>
-                                    Submit
-                                </Button>
+                        <Stack spacing={[1, 3]} direction={'column'}>
+                            <Card key={-1} padding={2}>
+                                <Button onClick={selectAll}>Select All</Button>
+                                <Button mt={1} onClick={submit}>Submit</Button>
                             </Card>
-                            {
-                                mokupInfo && arraySelected.length > 0 && mokupInfo.map((element, index) => {
-                                    console.log("selected", arraySelected[index]);
+                            {mokupInfo &&
+                                arraySelected.length > 0 &&
+                                mokupInfo.map((element, index) => {
+                                    console.log('selected', arraySelected[index]);
                                     return (
-                                        <Card key={index} padding={2} >
-                                            <Checkbox value={element.text} isChecked={arraySelected[index]} onChange={() => { selectOnePlant(index) }}  >
+                                        <Card key={index} padding={2}>
+                                            <Checkbox
+                                                value={element.text}
+                                                isChecked={arraySelected[index]}
+                                                onChange={() => {
+                                                    selectOnePlant(index);
+                                                }}
+                                            >
                                                 <Image width="40px" src={element.img} />
-                                                {element.text + " " + element.info[0]}
+                                                {element.text + ' ' + element.info[0]}
                                             </Checkbox>
                                         </Card>
-                                    )
-                                })
-                            }
+                                    );
+                                })}
                         </Stack>
                     </ModalBody>
                 </ModalContent>
             </Modal>
         </>
-    )
-}
+    );
+};

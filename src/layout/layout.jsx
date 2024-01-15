@@ -1,48 +1,60 @@
-import { Flex, HStack } from "@chakra-ui/react";
+import { Flex, HStack, useMediaQuery } from "@chakra-ui/react";
 import { Outlet, Link as ReactRouterLink } from 'react-router-dom'
 import { Link as ChakraLink } from '@chakra-ui/react'
+import { useAccount } from "wagmi";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import React from 'react';
 
 
 export default function Layout() {
+	const [isSmallerThan768] = useMediaQuery('(max-width: 768px)');
+	const { isConnected } = useAccount()
+
 	return (
 		<>
 			<Flex
 				justifyContent="space-between"
 				alignItems="center"
 				padding={4}
-				bgGradient='linear(to-r, #333B6A,  #B7FEAE)'
+				bgGradient='linear(to-r, #333B6A, #B7FEAE)'
 				color="white"
 				boxShadow="md"
-			>
-				<HStack spacing={10}>
+				direction='row'>
+				<HStack spacing={isSmallerThan768 ? 4 : 10}>
 					<ChakraLink
 						as={ReactRouterLink}
 						to="/"
-						fontSize="xl"
+						fontSize={isSmallerThan768 ? 'md' : 'xl'}
 						fontWeight="bold"
 					>
 						Home
 					</ChakraLink>
-					<ChakraLink
-						as={ReactRouterLink}
-						to="/profile"
-						fontSize="xl"
-						fontWeight="bold"				>
-						Profile
-					</ChakraLink>
-					<ChakraLink
-						as={ReactRouterLink}
-						to="/review"
-						fontSize="xl"
-						fontWeight="bold"	>
-						Review
-					</ChakraLink>
+
+					{isConnected && (
+						<>
+							<ChakraLink
+								as={ReactRouterLink}
+								to="/profile"
+								fontSize={isSmallerThan768 ? 'md' : 'xl'}
+								fontWeight="bold"
+							>
+								Profile
+							</ChakraLink>
+							<ChakraLink
+								as={ReactRouterLink}
+								to="/review"
+								fontSize={isSmallerThan768 ? 'md' : 'xl'}
+								fontWeight="bold"
+							>
+								Review
+							</ChakraLink>
+						</>
+					)}
+
 				</HStack>
 				<ConnectButton />
 			</Flex>
 			<Outlet />
 		</>
 	);
-}
+};

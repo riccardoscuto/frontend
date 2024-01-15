@@ -25,12 +25,12 @@ export default function ModalImg({ info, img, text }) {
         console.log("Level Up");
         console.log(error, prepareError);
         await write?.();
-        
+
     };
 
     return (
         <>
-            <Image onClick={onOpen} src={img} width="100%" height="250px" />
+            <Image onClick={onOpen} src={img} width="100%" height="200px" transform={"scale(0.8, 0.9)"} />
             <ModalStatPlant plantImg={img} plantText={text} arrayInfo={info} isOpen={isOpen} onClose={onClose} levelUp={levelUp} />
             {isError && <h1>Error</h1>}
             {isPrepareError && <h1>Prepare Error</h1>}
@@ -56,7 +56,7 @@ export function ModalStatPlant({ isOpen, onClose, plantImg, plantText, arrayInfo
 function StatPlant({ plantImg, plantText, arrayInfo, levelUp }) {
     return (
         <>
-            <Flex>
+            <Flex justifyContent={'space-between'} direction={'row'}>
                 <Flex alignItems="center">
                     <IconButton
                         colorScheme="teal"
@@ -69,8 +69,8 @@ function StatPlant({ plantImg, plantText, arrayInfo, levelUp }) {
                     />
                 </Flex>
                 <Flex justifyContent="space-around">
-                    <Image src={plantImg} width={180} height={180} />
-                    <UnorderedList fontSize={28}>
+                    <Image src={plantImg} width={150} height={150} />
+                    <UnorderedList fontSize={16}>
                         {arrayInfo &&
                             arrayInfo.map((element, index) => {
                                 return <ListItem key={index}>{element}</ListItem>;
@@ -81,6 +81,7 @@ function StatPlant({ plantImg, plantText, arrayInfo, levelUp }) {
                     <IconButton
                         colorScheme="teal"
                         aria-label="Call Segun"
+
                         size="lg"
                         icon={<ArrowRightIcon />}
                         onClick={() => {

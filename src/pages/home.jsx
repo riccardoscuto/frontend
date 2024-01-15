@@ -3,7 +3,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
 import ModalImg from "../Components/StatPlant";
 import MultiFeed from "../Components/MultiFeed";
-import { Card, CardBody, CardFooter } from '@chakra-ui/react'
+import { Card, CardBody, CardFooter, useMediaQuery } from '@chakra-ui/react'
 import { Link as ChakraLink } from '@chakra-ui/react';
 import { Link as ReactRouterLink } from 'react-router-dom';
 import mockup from '../mockup/mockup'
@@ -15,6 +15,8 @@ const HomepageText = "Unlock a world of growth and rewards! Leave feedback for y
 
 export default function Home() {
 	const { isConnected } = useAccount()
+	const [isSmallerThan768] = useMediaQuery('(max-width: 768px)');
+
 	if (isConnected) {
 		return (
 			<>
@@ -22,15 +24,15 @@ export default function Home() {
 					<Splide aria-label="Images"
 						options={{
 							rewind: true,
-							width: "63%",
-							perPage: 3,
+							width: isSmallerThan768 ? "100%" : "1060px",
+							perPage: isSmallerThan768 ? 1 : 3,
 							gap: '1rem',
 							rewindByDrag: true,
 							drag: 'free',
 							snap: true,
 							keyboard: 'global',
-							padding: 10,
-							fixedWidth: 300,
+							padding: isSmallerThan768 ? 0 : 10,
+							fixedWidth: isSmallerThan768 ? 280 : 300,
 						}}>
 
 						{mockup &&
@@ -41,7 +43,7 @@ export default function Home() {
 										padding: '4px',
 										boxSizing: 'border-box',
 									}}>
-										<CardBody borderRadius="4px" backgroundColor="teal.800" >
+										<CardBody borderRadius="4px" backgroundColor="teal.800"  >
 											<ModalImg height="100%" width="100px" img={element.img} info={element.info} text={element.text} />
 
 										</CardBody>
@@ -54,7 +56,7 @@ export default function Home() {
 								</SplideSlide>
 							))}
 					</Splide>
-					<Flex width="15%" justifyContent={"space-between"}>
+					<Flex width="100%" gap={10} direction={"row"} justifyContent={"center"}>
 						<Button>
 							<ChakraLink as={ReactRouterLink} to="/redeem">
 								Redeem
@@ -75,21 +77,26 @@ export default function Home() {
 			<Box mt={4}>
 				<Card>
 					<CardBody>
-						<Flex gap={10} justify="center">
-							<Image src="/home1.png" height="auto" width="50%" />
+						<Flex
+							direction={{ base: 'column', md: 'row' }} // Stack columns on small screens and use rows on medium screens and above
+							align={{ base: 'center', md: 'flex-start' }} // Center content on small screens and align to the start on medium screens and above
+							justify="center"
+							gap={{ base: 4, md: 10 }} // Adjust spacing based on screen size
+						>
+							<Image src="/home1.png" height="auto" width={{ base: '100%', md: '50%' }} /> {/* Adjust width based on screen size */}
 							<Box>
-								<Text whiteSpace={"pre-line"} fontSize="25px" fontWeight={500} height="100%" width="100%">
+								<Text whiteSpace={"pre-line"} fontSize={{ base: '18px', md: '25px' }} fontWeight={500} height="100%" width="100%">
 									{HomepageText}
 								</Text>
 							</Box>
 						</Flex>
-						<Flex justifyContent="center" marginTop={50}>
-							<ConnectButton />
+						<Flex justifyContent="center" marginTop={{ base: 4, md: 50 }}>
+							{/* Include your ConnectButton component here */}
 						</Flex>
 					</CardBody>
 				</Card>
 			</Box>
-		</Container >
+		</Container>
 
 	);
 }
