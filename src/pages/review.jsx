@@ -13,12 +13,14 @@ export default function Review() {
 
     if (isConnected)
         return (
-            <Flex alignItems={"start"}>
-                <Box p={4} justifyContent={"left"} marginLeft={12}>
-                    <Searchbar tag={tag} searchTag={searchTag} setTag={setTag}></Searchbar>
-                </Box>
-                <Divider></Divider>
-                <Stack >{
+            <>
+                <Flex alignItems={"start"}>
+                    <Box p={4} justifyContent={"left"} marginLeft={12}>
+                        <Searchbar tag={tag} searchTag={searchTag} setTag={setTag}></Searchbar>
+                    </Box>
+                    <Divider></Divider>
+                </Flex>
+                <Stack direction={"row"}>{
                     elements && elements.map((element, index) => {
                         return (
                             <Card maxW='sm' key={index}>
@@ -42,7 +44,7 @@ export default function Review() {
                     })
 
                 }</Stack>
-            </Flex>
+            </>
         );
 };
 
