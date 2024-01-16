@@ -1,5 +1,6 @@
-import { Box, Button, Container, Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Image, Text } from "@chakra-ui/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { ChevronRightIcon } from '@chakra-ui/icons'
 import { useAccount } from "wagmi";
 import ModalImg from "../Components/StatPlant";
 import MultiFeed from "../Components/MultiFeed";
@@ -73,9 +74,56 @@ export default function Home() {
 	}
 	else return (
 
-		<Container maxW="container.xl" height="100%">
+		<Container p={0} maxW="container.xl" height="100%">
+			<Box
+				pos="relative"
+				h="90vh" >
+				<Box
+					bgImage={`url(public/sfondo2.jpg)`}
+					bgSize="cover"
+					zIndex={-1}
+					bgPosition="center"
+					bgRepeat="no-repeat"
+					h="100%"
+					filter="brightness(40%) blur(2px) grayscale(0.2)"
+				/>
+				<Flex
+					pos="absolute"
+					top="20%"
+					left="0%"
+					w={"100%"}
+					direction="column"
+					textAlign="center"
+					color="white"
+				>
+					<Image src="public/logo.png" m={"auto"} w={"300px"} h={"auto"} borderRadius={10}></Image>
+					<Text mt={10} textAlign={"center"} whiteSpace={"pre-line"} fontSize={{ base: '30px', md: '40px' }} color={"white"} fontWeight={500} height="100%" width="100%">
+
+						Feedback Fuels Growth Empower Your Voice
+						<br />
+						Reap the Rewards
+					</Text>
+				</Flex>
+			</Box>
 			<Box mt={4}>
-				<Card>
+				<Flex direction={"row"} mt={40} alignItems={"center"} justifyContent={"space-evenly"} h={{ base: '10vh', md: '40vh' }}>
+					<Card w={"auto"} h={"100%"} background={"teal.700"}>
+						<Image src="public/plant_lv1.webp" w={"100%"} h={"100%"} >
+						</Image>
+					</Card>
+					<ChevronRightIcon fontSize={{ base: 30, md: 60 }} />
+					<Card w={"auto"} h={"100%"} background={"teal.700"}>
+						<Image src="public/plant_lv3.webp" w={"100%"} h={"100%"} >
+						</Image>
+					</Card>
+					<ChevronRightIcon fontSize={{ base: 30, md: 60 }} />
+					<Card w={"auto"} h={"100%"} background={"teal.700"}>
+						<Image src="public/plant_lv5.webp" w={"100%"} h={"100%"} >
+						</Image>
+					</Card>
+
+				</Flex>
+				<Card mt={40}  >
 					<CardBody>
 						<Flex
 							direction={{ base: 'column', md: 'row' }} // Stack columns on small screens and use rows on medium screens and above
