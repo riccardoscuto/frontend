@@ -2,7 +2,7 @@ import { Box, Button, Container, Flex, Image, Text } from "@chakra-ui/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import { useAccount } from "wagmi";
-import ModalImg from "../Components/StatPlant";
+import ModalImg, { ModalStatPlant } from "../Components/StatPlant";
 import MultiFeed from "../Components/MultiFeed";
 import { Card, CardBody, CardFooter, useMediaQuery } from '@chakra-ui/react'
 import { Link as ChakraLink } from '@chakra-ui/react';
@@ -10,6 +10,8 @@ import { Link as ReactRouterLink } from 'react-router-dom';
 import mockup from '../mockup/mockup'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import "../App.css"
+import { useState } from "react";
+import { useWrite } from "../hook/useWrite";
 
 
 const HomepageText = "Unlock a world of growth and rewards! Leave feedback for your exclusive Febaval codes.\n\nClaim it, earn feed tokens, and cultivate virtual plants. Sign up, mint your sprout, and earn value tokens for exciting rewards.\n\nYour journey to extraordinary interactions starts here!"
@@ -17,6 +19,36 @@ const HomepageText = "Unlock a world of growth and rewards! Leave feedback for y
 export default function Home() {
 	const { isConnected } = useAccount()
 	const [isSmallerThan768] = useMediaQuery('(max-width: 768px)');
+	const { isOpen, onOpen, onClose } = useDisclosure();
+	const [indexPlant, setIndex] = useState(0);
+	const { write, error, prepareError, isError, isPrepareError } = useWrite({
+		abi: [{
+			"inputs": [],
+			"name": "unpause",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		}],
+		address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+		args: [],
+		enabled: true,
+		functionName: "unpause",
+		value: BigInt(0)
+	});
+	const levelUp = async () => {
+		console.log("Level Up");
+		console.log(error, prepareError);
+		await write?.();
+	};
+	const switchRight = () => {
+		if (indexPlant < (mockup.length - 1))
+			setIndex(indexPlant + 1);
+	}
+	const switchLeft = () => {
+		if (indexPlant != 0)
+			setIndex(indexPlant - 1);
+	}
+
 
 	if (isConnected) {
 		return (
@@ -45,7 +77,7 @@ export default function Home() {
 										boxSizing: 'border-box',
 									}}>
 										<CardBody borderRadius="4px" backgroundColor="teal.800"  >
-											<ModalImg height="100%" width="100px" img={element.img} info={element.info} text={element.text} />
+											<ModalImg height="100%" width="100px" img={element.img} info={element.info} text={element.text} onOpen={()=>{setIndex(index);onOpen()}} />
 
 										</CardBody>
 										<CardFooter>
@@ -55,8 +87,10 @@ export default function Home() {
 										</CardFooter>
 									</Card>
 								</SplideSlide>
+
 							))}
 					</Splide>
+					<ModalStatPlant plant={mockup[indexPlant]} isOpen={isOpen} onClose={onClose} levelUp={levelUp} switchLeft={switchLeft} switchRight={switchRight} />
 					<Flex width="100%" gap={10} direction={"row"} justifyContent={"center"}>
 						<Button>
 							<ChakraLink as={ReactRouterLink} to="/redeem">
