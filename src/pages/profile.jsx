@@ -35,7 +35,7 @@ function StatToken() {
 
   return (
     <>
-      <Button onClick={onOpen}>Stat token </Button>
+      <Button mb={1} onClick={onOpen}>Stat token </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -51,7 +51,7 @@ function StatToken() {
   )
 }
 
-function Edit( {username, image, setImage, setUsername} ) {
+function Edit({ username, image, setImage, setUsername }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const handleUsernameChange = (e) => setUsername(e.target.value);
 
@@ -76,13 +76,13 @@ function Edit( {username, image, setImage, setUsername} ) {
           <ModalCloseButton />
           <ModalBody>
             <Stack spacing={4}>
-              <Flex alignItems="center">
-                <Text mr={2}>Username:</Text>
-                <Input value={username} onChange={handleUsernameChange} placeholder="Enter your username" size="sm" w="200px" />
+              <Flex justifyContent={"start"} gap={4} alignItems="center">
+                <Text >Username:</Text>
+                <Input value={username} onChange={handleUsernameChange} placeholder="Enter your username" size="sm" />
               </Flex>
-              <Flex alignItems="center">
-                <Text mr={2}>Upload Image:</Text>
-                <Input type="file" onChange={handleImageChange} size="sm" w="200px" />
+              <Flex justifyContent={"start"} gap={4} alignItems="center">
+                <Text w={"10rem"} >Upload Image:</Text>
+                <Input p={0.5} type="file" onChange={handleImageChange} size="sm" />
               </Flex>
             </Stack>
           </ModalBody>
