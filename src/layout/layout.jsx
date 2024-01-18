@@ -48,6 +48,14 @@ export default function Layout() {
 							>
 								Review
 							</ChakraLink>
+							<ChakraLink
+								as={ReactRouterLink}
+								to="/trade"
+								fontSize={isSmallerThan768 ? 'md' : 'xl'}
+								fontWeight="bold"
+							>
+								Trade
+							</ChakraLink>
 						</>
 					)}
 
