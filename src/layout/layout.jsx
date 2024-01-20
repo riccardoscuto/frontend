@@ -15,6 +15,7 @@ export default function Layout() {
 			<Flex
 				justifyContent="space-between"
 				alignItems="center"
+				h={"70px"}
 				padding={4}
 				bgGradient='linear(to-r, #333B6A, #B7FEAE)'
 				color="white"
