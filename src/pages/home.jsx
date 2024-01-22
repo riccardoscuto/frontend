@@ -166,17 +166,19 @@ export default function Home() {
 	}
 	else return (
 
-		<Container p={0} maxW="container.xl" height="100%" >
+		<Container p={0} maxW={"full"} className="scroll-container">
 			<Box
 				pos="relative"
-				h="90vh" >
+				className="scroll-section"
+				p={0} >
 				<Box
 					bgImage={`url(/sfondo.jpg)`}
 					bgSize="cover"
-					zIndex={-1}
+					zIndex={0}
 					bgPosition="center"
 					bgRepeat="no-repeat"
 					h="100%"
+					w="100%"
 					filter="brightness(40%) blur(2px) grayscale(0.2)"
 				/>
 				<Flex
@@ -195,56 +197,44 @@ export default function Home() {
 					</Text>
 				</Flex>
 			</Box>
-			<Box m={4}>
-				<Flex mt={{ base: 20, md: 40 }} justifyContent={"center"}>
-					<Card h={"fit-content"} w={"fit-content"} >
-						<CardBody h={"fit-content"} w={"fit-content"}>
-							<Image src="/Febaval_plant_details_updated.png" w={"auto"} h={"auto"} maxHeight={400} objectFit={"contain"}>
+			{!isSmallerThan768 && (
+				<>
+					<Box
+						pos="relative"
+						className="scroll-section" >
+						<Box w={"100%"} h={"100%"} bgImage={"/Febaval_homepage_presentation_1.png"} bgSize={"contain"} bgRepeat={"no-repeat"} bgPosition={"center"}></Box>
+					</Box>
+					<Box
+						pos="relative"
+						className="scroll-section" >
+						<Box w={"100%"} h={"100%"} bgImage={"/Febaval_homepage_presentation_2.png"} bgSize={"contain"} bgRepeat={"no-repeat"} bgPosition={"center"}></Box>
+					</Box>
+					<Box
+						pos="relative"
+						className="scroll-section" >
+						<Box w={"100%"} h={"100%"} bgImage={"/Febaval_homepage_presentation_3.png"} bgSize={"contain"} bgRepeat={"no-repeat"} bgPosition={"center"}></Box>
+					</Box>
 
-							</Image>
+				</>
+			)}
+			{isSmallerThan768 && (
+				<>
+					<Flex
+						pos="relative"
+						className="scroll-section"
+						direction={"column"}
+					>
+						<Box w={"100%"} h={"100%"} bgImage={"/Febaval_homepage_presentation_1.png"} bgSize={"contain"} bgRepeat={"no-repeat"} bgPosition={"center"}></Box>
+						<Box w={"100%"} h={"100%"} bgImage={"/Febaval_homepage_presentation_2.png"} bgSize={"contain"} bgRepeat={"no-repeat"} bgPosition={"center"}></Box>
+						<Box w={"100%"} h={"100%"} bgImage={"/Febaval_homepage_presentation_3.png"} bgSize={"contain"} bgRepeat={"no-repeat"} bgPosition={"center"}></Box>
 
-						</CardBody>
-					</Card>
-				</Flex>
-				<Flex direction={"row"} mt={{ base: 20, md: 40 }} alignItems={"center"} justifyContent={"space-evenly"} h={{ base: '10vh', md: '40vh' }}>
-					<Card w={"auto"} h={"100%"} background={"teal.700"}>
-						<Image src="/plant_lv1.webp" w={"100%"} h={"100%"} transform={"scale(0.9, 0.9)"} >
-						</Image>
-					</Card>
-					<ChevronRightIcon fontSize={{ base: 30, md: 60 }} />
-					<Card w={"auto"} h={"100%"} background={"teal.700"}>
-						<Image src="/plant_lv3.webp" w={"100%"} h={"100%"} transform={"scale(0.9, 0.9)"} >
-						</Image>
-					</Card>
-					<ChevronRightIcon fontSize={{ base: 30, md: 60 }} />
-					<Card w={"auto"} h={"100%"} background={"teal.700"}>
-						<Image src="/plant_lv5.webp" w={"100%"} h={"100%"} transform={"scale(0.9, 0.9)"} >
-						</Image>
-					</Card>
+					</Flex>
+				</>
+			)}
 
-				</Flex>
-				<Card mt={{ base: 20, md: 40 }} mb={20}>
-					<CardBody>
-						<Flex
-							direction={{ base: 'column', md: 'row' }} // Stack columns on small screens and use rows on medium screens and above
-							align={{ base: 'center', md: 'flex-start' }} // Center content on small screens and align to the start on medium screens and above
-							justify="center"
-							gap={{ base: 4, md: 10 }} // Adjust spacing based on screen size
-						>
-							<Image src="/Febaval_presentation_updated.png" height="auto" width={{ base: '100%', md: '50%' }} /> {/* Adjust width based on screen size */}
-							<Box>
-								<Text whiteSpace={"pre-line"} fontSize={{ base: '18px', md: '25px' }} fontWeight={500} height="100%" width="100%">
-									{HomepageText}
-								</Text>
-							</Box>
-						</Flex>
-						<Flex justifyContent="center" marginTop={{ base: 4, md: 50 }}>
-							{/* Include your ConnectButton component here */}
-						</Flex>
-					</CardBody>
-				</Card>
-			</Box>
+
 		</Container>
+
 
 	);
 }
