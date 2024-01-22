@@ -1,13 +1,30 @@
 import { useState } from "react";
 import {
-  Box, Button, Center, Flex, Input, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Stack, Text, useColorModeValue, StatNumber, useDisclosure
+  Box, Button, Center, Flex, Input, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Stack, Text, useColorModeValue, StatNumber, useDisclosure, useInterval
 } from "@chakra-ui/react";
-import { useAccount } from "wagmi";
+import { useAccount, usePublicClient } from "wagmi";
+import { getBalance, getUserInfo } from "../lib/info";
+
 
 export default function ProfilePage() {
-  const { isConnected } = useAccount()
+  const { isConnected, address } = useAccount();
+  const publicClient = usePublicClient();
   const [username, setUsername] = useState("Test");
+  const [balanceUser, setBalanceUser] = useState(0);
+  const [currentBalanceUser, setCurrentBalanceUser] = useState(0);
   const [image, setImage] = useState("https://via.placeholder.com/200");
+  useInterval(() => {
+
+    (async () => {
+      const data = await getBalance(publicClient, address);
+      const data2 = await getUserInfo(publicClient, address);
+      setBalanceUser(data.toString());
+      setCurrentBalanceUser(data2[1].toString());
+      //console.log(data)
+      //console.log(data2)
+    })()
+  }, 500)
+
 
   if (isConnected)
     return (
@@ -19,7 +36,8 @@ export default function ProfilePage() {
                 <img src={image} alt="Profile" style={{ width: "100%" }} />
               </Box>
               <Text mb={2}>{username}</Text>
-              <StatToken></StatToken>
+              <div>All Token:{balanceUser}</div>
+              <div>Current Token:{currentBalanceUser}</div>
               <Edit username={username} image={image} setImage={setImage} setUsername={setUsername}></Edit>
             </Flex>
           </Center>

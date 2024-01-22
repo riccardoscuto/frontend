@@ -48,7 +48,7 @@ export default function MultiFeed({ mokupInfo }) {
                             {mokupInfo &&
                                 arraySelected.length > 0 &&
                                 mokupInfo.map((element, index) => {
-                                    console.log('selected', arraySelected[index]);
+                                    
                                     return (
                                         <Card key={index} padding={2}>
                                             <Checkbox

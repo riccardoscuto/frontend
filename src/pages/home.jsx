@@ -1,4 +1,4 @@
-import { Box, Button, Center, Container, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Center, Container, Flex, Image, Text, useInterval, useToast } from "@chakra-ui/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import { useAccount, usePublicClient } from "wagmi";
@@ -14,10 +14,8 @@ import { useEffect, useState } from "react";
 import { useWrite } from "../hook/useWrite";
 import { useDisclosure } from "@chakra-ui/react"
 import contract from "../constants/contract";
-import { getPlantImage, getPlantInfo, getUserInfo } from "../lib/info";
+import { getBorderColor, getPlantImage, getPlantInfo, getUserInfo } from "../lib/info";
 
-
-const HomepageText = "Unlock a world of growth and rewards! Leave feedback for your exclusive Febaval codes.\n\nClaim it, earn feed tokens, and cultivate virtual plants. Sign up, mint your sprout, and earn value tokens for exciting rewards.\n\nYour journey to extraordinary interactions starts here!"
 
 export default function Home() {
 	const { isConnected, address } = useAccount()
@@ -26,7 +24,10 @@ export default function Home() {
 	const [indexPlant, setIndex] = useState(0);
 	const [userInfo, setUserInfo] = useState(null);
 	const publicClient = usePublicClient();
+	const [idPlant, setIdPlant] = useState(0);
 	const [arrayPlant, setArrayPlant] = useState([]);
+	const toast = useToast();
+
 	useEffect(() => {
 		(async () => {
 			const data = await getUserInfo(publicClient, address);
@@ -37,61 +38,103 @@ export default function Home() {
 				level: data[3],
 				lastClaimTime: data[4]
 			})
-			console.log(data)
 			const aux = []
+			setIdPlant(data[2][0])
 			for (let plantId of data[2]) {
 				const info = await getPlantInfo(publicClient, plantId)
-				console.log(info)
 				aux.push({ level: info[0], id: plantId, owner: info[1] })
 			}
 			setArrayPlant(aux)
 		})()
-
-
-
-
-
-
 	}, [])
 
+	useInterval(() => {
+		(async () => {
+			const data = await getUserInfo(publicClient, address);
+			setUserInfo({
+				isStarted: data[0],
+				feedTokens: data[1],
+				ownedNFT: data[2],
+				level: data[3],
+				lastClaimTime: data[4]
+			})
 
+			const aux = []
+			for (let plantId of data[2]) {
+				const info = await getPlantInfo(publicClient, plantId)
 
+				aux.push({ level: info[0], id: plantId, owner: info[1] })
+			}
+			setArrayPlant(aux)
+		})()
+	}, 500)
 
 	const levelUpTransaction = useWrite({
 		abi: contract.abi,
 		address: contract.address,
-		args: [indexPlant],
+		args: [idPlant],
 		enabled: true,
 		functionName: "levelUp",
 		value: BigInt(0)
 	});
-	const startUserTransaction = useWrite({
+	
+	const claimTransaction = useWrite({
+		abi: contract.abi,
+		address: contract.address,
+		args: [100n],
+		enabled: true,
+		functionName: "addFeedTokens",
+		value: BigInt(0)
+	})
+
+	const mintTransaction = useWrite({
 		abi: contract.abi,
 		address: contract.address,
 		args: [],
 		enabled: true,
+		functionName: "mintPlant",
+		value: BigInt(0)
+	})
+
+	const startUserTransaction = useWrite({
+		abi: contract.abi,
+		address: contract.address,
+		args: [],
+		enabled: userInfo && !userInfo.isStarted,
 		functionName: "startUser",
 		value: BigInt(0)
 	});
+	
+
+
 	const levelUp = async () => {
 		console.log("Level Up");
-		console.log(levelUpTransaction.error, levelUpTransaction.prepareError,);
 		await levelUpTransaction.write?.();
 	};
 	const switchRight = () => {
-		if (indexPlant < (arrayPlant.length - 1))
+		if (indexPlant < (arrayPlant.length - 1)) {
 			setIndex(indexPlant + 1);
+			setIdPlant(arrayPlant[indexPlant+1].id)
+		}
 	}
 	const switchLeft = () => {
-		if (indexPlant != 0)
+		if (indexPlant != 0) {
 			setIndex(indexPlant - 1);
+			setIdPlant(arrayPlant[indexPlant-1].id)
+		}
 	}
 	const startUser = async () => {
 		console.log("start User")
 		await startUserTransaction.write?.();
-
 	}
-
+	const claimFeedToken = async () => {
+		console.log("claimFeedToken")
+		await claimTransaction.write?.();
+	}
+	const mint = async () => {
+		console.log("minted plant")
+		await mintTransaction.write?.();
+	}
 
 
 	if (isConnected) {
@@ -113,7 +156,6 @@ export default function Home() {
 									padding: isSmallerThan768 ? 0 : 10,
 									fixedWidth: isSmallerThan768 ? 280 : 300,
 								}}>
-
 								{arrayPlant &&
 									arrayPlant.map((element, index) => (
 										<SplideSlide key={index}>
@@ -123,12 +165,11 @@ export default function Home() {
 												boxSizing: 'border-box',
 											}}>
 												<CardBody borderRadius="4px" backgroundColor="teal.800"  >
-													<ModalImg height="100%" width="100px" img={getPlantImage(element.level)} info={[]} text={element.id} onOpen={() => { setIndex(index); onOpen() }} />
-
+													<ModalImg height="100%" width="100px" img={getPlantImage(element.level)} info={["level: " + element.level]} text={element.id} onOpen={() => { setIndex(index); setIdPlant(element.id); onOpen() }} />
 												</CardBody>
 												<CardFooter>
 													<Text fontSize="16px" color="black">
-														{element.text}
+														Level: {element.level.toString()}
 													</Text>
 												</CardFooter>
 											</Card>
@@ -136,7 +177,7 @@ export default function Home() {
 
 									))}
 							</Splide>
-							{arrayPlant.length>0 && <ModalStatPlant plant={arrayPlant[indexPlant]} isOpen={isOpen}
+							{arrayPlant.length > 0 && <ModalStatPlant plant={arrayPlant[indexPlant]} isOpen={isOpen}
 								onClose={onClose} levelUp={levelUp} switchLeft={switchLeft} switchRight={switchRight} />
 							}
 							<Flex width="100%" gap={10} direction={"row"} justifyContent={"center"}>
@@ -144,6 +185,12 @@ export default function Home() {
 									<ChakraLink as={ReactRouterLink} to="/redeem">
 										Redeem
 									</ChakraLink>
+								</Button>
+								<Button onClick={claimFeedToken}>
+									Add Feed Token
+								</Button>
+								<Button onClick={mint}>
+									Mint plant
 								</Button>
 								<MultiFeed mokupInfo={mockup} >
 
@@ -163,9 +210,7 @@ export default function Home() {
 				</>
 			)
 		}
-	}
-	else return (
-
+	} else return (
 		<Container p={0} maxW={"full"} className="scroll-container">
 			<Box
 				pos="relative"
@@ -227,34 +272,12 @@ export default function Home() {
 						<Box w={"100%"} h={"100%"} bgImage={"/Febaval_homepage_presentation_1.png"} bgSize={"contain"} bgRepeat={"no-repeat"} bgPosition={"center"}></Box>
 						<Box w={"100%"} h={"100%"} bgImage={"/Febaval_homepage_presentation_2.png"} bgSize={"contain"} bgRepeat={"no-repeat"} bgPosition={"center"}></Box>
 						<Box w={"100%"} h={"100%"} bgImage={"/Febaval_homepage_presentation_3.png"} bgSize={"contain"} bgRepeat={"no-repeat"} bgPosition={"center"}></Box>
-
 					</Flex>
 				</>
 			)}
-
-
 		</Container>
-
-
 	);
 }
 
-function getBorderColor(level) {
-	switch (level) {
-		case "Level: 1":
-			return "level1";
-		case "Level: 2":
-			return 'level2'; // Change this to the desired color for level 2
-		case "Level: 3":
-			return 'level3'; // Change this to the desired color for level 3
-		case "Level: 4":
-			return 'level4'; // Change this to the desired color for level 4
-		case "Level: 5":
-			return 'level5'; // Change this to the desired color for level 5
-		// Add more cases for other levels if needed
-		default:
-			console.log('Invalid level: ' + level);
-			return 'level1'; // Default color if level is not specified
-	}
-}
+
 
