@@ -2,6 +2,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import { Button, Flex, IconButton, Image, ListItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, UnorderedList, useDisclosure } from "@chakra-ui/react";
 import React from "react";
 import { useWrite } from '../hook/useWrite';
+import { getPlantImage } from "../lib/info";
 
 
 export default function ModalImg({ info, img, text , onOpen}) {
@@ -19,10 +20,10 @@ export function ModalStatPlant({ isOpen, onClose, plant, levelUp, switchLeft, sw
         <Modal isOpen={isOpen} onClose={onClose} size="lg">
             <ModalOverlay />
             <ModalContent>
-                <ModalHeader>{plant.text}</ModalHeader>
+                <ModalHeader>{plant.id}</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                    <StatPlant arrayInfo={plant.info} plantImg={plant.img} plantText={plant.text} levelUp={levelUp} switchLeft={switchLeft} switchRight={switchRight} />
+                    <StatPlant arrayInfo={[]} plantImg={getPlantImage(plant.level)} plantText={plant.id} levelUp={levelUp} switchLeft={switchLeft} switchRight={switchRight} />
                 </ModalBody>
             </ModalContent>
         </Modal>

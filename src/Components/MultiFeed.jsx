@@ -1,23 +1,18 @@
 import { Button, Checkbox, CheckboxGroup, Image, Card, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useWrite } from "../hook/useWrite";
+import contract from "../constants/contract";
 
 
 export default function MultiFeed({ mokupInfo }) {
     const [arraySelected, setArraySelected] = useState([]);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { write, error, prepareError, isError, isPrepareError } = useWrite({
-        abi: [{
-            "inputs": [],
-            "name": "unpause",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        }],
-        address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        abi: contract.abi,
+        address: contract.address,
         args: [],
         enabled: true,
-        functionName: "unpause",
+        functionName: "levelUp",
         value: BigInt(0)
     });
 

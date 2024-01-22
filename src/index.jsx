@@ -21,7 +21,7 @@ import { publicProvider } from 'wagmi/providers/public';
 
 //config chain for wagmi
 const { chains, publicClient } = configureChains(
-	[mainnet],
+	[mainnet, hardhat],
 	[
 		publicProvider()
 	]

@@ -1,7 +1,7 @@
-import { Box, Button, Container, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Center, Container, Flex, Image, Text } from "@chakra-ui/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { ChevronRightIcon } from '@chakra-ui/icons'
-import { useAccount } from "wagmi";
+import { useAccount, usePublicClient } from "wagmi";
 import ModalImg, { ModalStatPlant } from "../Components/StatPlant";
 import MultiFeed from "../Components/MultiFeed";
 import { Card, CardBody, CardFooter, useMediaQuery } from '@chakra-ui/react'
@@ -10,102 +10,159 @@ import { Link as ReactRouterLink } from 'react-router-dom';
 import mockup from '../mockup/mockup'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import "../App.css"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useWrite } from "../hook/useWrite";
 import { useDisclosure } from "@chakra-ui/react"
+import contract from "../constants/contract";
+import { getPlantImage, getPlantInfo, getUserInfo } from "../lib/info";
 
 
 const HomepageText = "Unlock a world of growth and rewards! Leave feedback for your exclusive Febaval codes.\n\nClaim it, earn feed tokens, and cultivate virtual plants. Sign up, mint your sprout, and earn value tokens for exciting rewards.\n\nYour journey to extraordinary interactions starts here!"
 
 export default function Home() {
-	const { isConnected } = useAccount()
+	const { isConnected, address } = useAccount()
 	const [isSmallerThan768] = useMediaQuery('(max-width: 768px)');
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [indexPlant, setIndex] = useState(0);
-	const { write, error, prepareError, isError, isPrepareError } = useWrite({
-		abi: [{
-			"inputs": [],
-			"name": "unpause",
-			"outputs": [],
-			"stateMutability": "nonpayable",
-			"type": "function"
-		}],
-		address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+	const [userInfo, setUserInfo] = useState(null);
+	const publicClient = usePublicClient();
+	const [arrayPlant, setArrayPlant] = useState([]);
+	useEffect(() => {
+		(async () => {
+			const data = await getUserInfo(publicClient, address);
+			setUserInfo({
+				isStarted: data[0],
+				feedTokens: data[1],
+				ownedNFT: data[2],
+				level: data[3],
+				lastClaimTime: data[4]
+			})
+			console.log(data)
+			const aux = []
+			for (let plantId of data[2]) {
+				const info = await getPlantInfo(publicClient, plantId)
+				console.log(info)
+				aux.push({ level: info[0], id: plantId, owner: info[1] })
+			}
+			setArrayPlant(aux)
+		})()
+
+
+
+
+
+
+	}, [])
+
+
+
+
+	const levelUpTransaction = useWrite({
+		abi: contract.abi,
+		address: contract.address,
+		args: [indexPlant],
+		enabled: true,
+		functionName: "levelUp",
+		value: BigInt(0)
+	});
+	const startUserTransaction = useWrite({
+		abi: contract.abi,
+		address: contract.address,
 		args: [],
 		enabled: true,
-		functionName: "unpause",
+		functionName: "startUser",
 		value: BigInt(0)
 	});
 	const levelUp = async () => {
 		console.log("Level Up");
-		console.log(error, prepareError);
-		await write?.();
+		console.log(levelUpTransaction.error, levelUpTransaction.prepareError,);
+		await levelUpTransaction.write?.();
 	};
 	const switchRight = () => {
-		if (indexPlant < (mockup.length - 1))
+		if (indexPlant < (arrayPlant.length - 1))
 			setIndex(indexPlant + 1);
 	}
 	const switchLeft = () => {
 		if (indexPlant != 0)
 			setIndex(indexPlant - 1);
 	}
+	const startUser = async () => {
+		console.log("start User")
+		await startUserTransaction.write?.();
+
+	}
+
 
 
 	if (isConnected) {
-		return (
-			<>
-				<Container maxW="full" centerContent height="100%">
-					<Splide aria-label="Images"
-						options={{
-							rewind: true,
-							width: isSmallerThan768 ? "100%" : "1060px",
-							perPage: isSmallerThan768 ? 1 : 3,
-							gap: '1rem',
-							rewindByDrag: true,
-							drag: 'free',
-							snap: true,
-							keyboard: 'global',
-							padding: isSmallerThan768 ? 0 : 10,
-							fixedWidth: isSmallerThan768 ? 280 : 300,
-						}}>
+		if (userInfo) {
+			if (userInfo.isStarted) {
+				return (
+					<>
+						<Container maxW="full" centerContent height="100%">
+							<Splide aria-label="Images"
+								options={{
+									rewind: true,
+									width: isSmallerThan768 ? "100%" : "1060px",
+									perPage: isSmallerThan768 ? 1 : 3,
+									gap: '1rem',
+									rewindByDrag: true,
+									drag: 'free',
+									snap: true,
+									keyboard: 'global',
+									padding: isSmallerThan768 ? 0 : 10,
+									fixedWidth: isSmallerThan768 ? 280 : 300,
+								}}>
 
-						{mockup &&
-							mockup.map((element, index) => (
-								<SplideSlide key={index}>
-									<Card m={2} borderRadius="8px" overflow="hidden" flex="0 0 auto" className={`${getBorderColor(element.info[0])}`} style={{
-										borderRadius: '8px',
-										padding: '4px',
-										boxSizing: 'border-box',
-									}}>
-										<CardBody borderRadius="4px" backgroundColor="teal.800"  >
-											<ModalImg height="100%" width="100px" img={element.img} info={element.info} text={element.text} onOpen={() => { setIndex(index); onOpen() }} />
+								{arrayPlant &&
+									arrayPlant.map((element, index) => (
+										<SplideSlide key={index}>
+											<Card m={2} borderRadius="8px" overflow="hidden" flex="0 0 auto" className={`${getBorderColor(element.level)}`} style={{
+												borderRadius: '8px',
+												padding: '4px',
+												boxSizing: 'border-box',
+											}}>
+												<CardBody borderRadius="4px" backgroundColor="teal.800"  >
+													<ModalImg height="100%" width="100px" img={getPlantImage(element.level)} info={[]} text={element.id} onOpen={() => { setIndex(index); onOpen() }} />
 
-										</CardBody>
-										<CardFooter>
-											<Text fontSize="16px" color="black">
-												{element.text}
-											</Text>
-										</CardFooter>
-									</Card>
-								</SplideSlide>
+												</CardBody>
+												<CardFooter>
+													<Text fontSize="16px" color="black">
+														{element.text}
+													</Text>
+												</CardFooter>
+											</Card>
+										</SplideSlide>
 
-							))}
-					</Splide>
-					<ModalStatPlant plant={mockup[indexPlant]} isOpen={isOpen} onClose={onClose} levelUp={levelUp} switchLeft={switchLeft} switchRight={switchRight} />
-					<Flex width="100%" gap={10} direction={"row"} justifyContent={"center"}>
-						<Button>
-							<ChakraLink as={ReactRouterLink} to="/redeem">
-								Redeem
-							</ChakraLink>
+									))}
+							</Splide>
+							{arrayPlant.length>0 && <ModalStatPlant plant={arrayPlant[indexPlant]} isOpen={isOpen}
+								onClose={onClose} levelUp={levelUp} switchLeft={switchLeft} switchRight={switchRight} />
+							}
+							<Flex width="100%" gap={10} direction={"row"} justifyContent={"center"}>
+								<Button>
+									<ChakraLink as={ReactRouterLink} to="/redeem">
+										Redeem
+									</ChakraLink>
+								</Button>
+								<MultiFeed mokupInfo={mockup} >
+
+								</MultiFeed>
+							</Flex>
+						</Container >
+					</>
+				)
+
+			} else return (
+				<>
+					<Flex justifyContent="space-around" alignItems="center">
+						<Button onClick={startUser}>
+							Start User
 						</Button>
-						<MultiFeed mokupInfo={mockup} >
-
-						</MultiFeed>
 					</Flex>
-				</Container >
-			</>
-		)
-
+				</>
+			)
+		}
 	}
 	else return (
 
