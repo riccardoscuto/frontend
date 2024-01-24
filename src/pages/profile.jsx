@@ -17,7 +17,7 @@ export default function ProfilePage() {
   const [newPlants, setPlants] = useState([])
   const [newLevels, setLevels] = useState([])
 
-  const [image, setImage] = useState("https://via.placeholder.com/200");
+  const [image, setImage] = useState("https://statics.cedscdn.it/photos/MED/41/29/1384129_0151126_cavalloalbalcone.jpg");
   useInterval(() => {
 
     (async () => {
@@ -25,7 +25,7 @@ export default function ProfilePage() {
       const data2 = await getUserInfo(publicClient, address);
       setBalanceUser(data.toString());
       setCurrentBalanceUser(data2[1].toString());
-      //console.log(data)
+      console.log(data)
       //console.log(data2)
     })()
   }, 500)
@@ -114,7 +114,7 @@ export default function ProfilePage() {
                 <img src={image} alt="Profile" style={{ width: "100%" }} />
               </Box>
               <Text mb={2}>{username}</Text>
-              <div>All Token:{balanceUser}</div>
+              <div>All Claimable Token:{balanceUser}</div> 
               <div>Current Token:{currentBalanceUser}</div>
               <Edit username={username} image={image} setImage={setImage} setUsername={setUsername}></Edit>
             </Flex>

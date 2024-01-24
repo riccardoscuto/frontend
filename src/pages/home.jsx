@@ -1,4 +1,4 @@
-import { Box, Button, Center, Container, Flex, Image, Text, useInterval, useToast } from "@chakra-ui/react";
+import { Box, Button, Center, Container, Flex, Image, Progress, Text, useInterval, useToast } from "@chakra-ui/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import { useAccount, usePublicClient } from "wagmi";
@@ -80,7 +80,7 @@ export default function Home() {
 		abi: contract.plant.abi,
 		address: contract.plant.address,
 		args: [100n],
-		enabled: userInfo && userInfo.isStarted ,
+		enabled: userInfo && userInfo.isStarted,
 		functionName: "addFeedTokens",
 		value: BigInt(0)
 	})
@@ -103,11 +103,23 @@ export default function Home() {
 		value: BigInt(0)
 	});
 
+	const claimFeedTransaction = useWrite({
+		abi: contract.plant.abi,
+		address: contract.plant.address,
+		args: [],
+		enabled: userInfo && userInfo.isStarted,
+		functionName: "claimFeedTokens",
+		value: BigInt(0)
+	});
 
 
 	const levelUp = async () => {
 		console.log("Level Up");
 		await levelUpTransaction.write?.();
+	};
+	const claim = async () => {
+		console.log("Level Up");
+		await claimFeedTransaction.write?.();
 	};
 	const switchRight = () => {
 		if (indexPlant < (arrayPlant.length - 1)) {
@@ -187,6 +199,9 @@ export default function Home() {
 								<Button onClick={claimFeedToken}>
 									Add Feed Token
 								</Button>
+								<Button onClick={claim}>
+									Claim
+								</Button>
 								<Button onClick={mint}>
 									Mint plant
 								</Button>
@@ -194,6 +209,13 @@ export default function Home() {
 
 								</MultiFeed> */}
 							</Flex>
+							{userInfo && <Progress width={"500px"} value={(((((Date.now() / 1000) - Number(userInfo.lastClaimTime.toString())) / 3600) / 48) * 100)} />}
+							{Math.round(((((Date.now() / 1000) - Number(userInfo.lastClaimTime.toString())) / 3600))) % 24}:
+							{Math.round(((((Date.now() / 1000) - Number(userInfo.lastClaimTime.toString())) / 60))) % 60}:
+							{Math.round(((((Date.now() / 1000) - Number(userInfo.lastClaimTime.toString()))))) % 60}
+							<Flex width={"500px"} height={"500px"}>
+							</Flex>
+
 						</Container >
 					</>
 				)
