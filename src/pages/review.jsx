@@ -14,36 +14,41 @@ export default function Review() {
     if (isConnected)
         return (
             <>
-                <Flex alignItems={"start"}>
-                    <Box p={4} justifyContent={"left"} marginLeft={12}>
+                <Flex justifyContent="center">
+                    <Text fontSize={['xl', '2xl', '3xl']} mb={8} fontWeight="bold" marginTop={2}>
+                        Find A Review!
+                    </Text>
+                </Flex>
+
+                <Flex justifyContent="center" alignItems="start" mb={8}>
+                    <Box p={4}>
                         <Searchbar tag={tag} searchTag={searchTag} setTag={setTag}></Searchbar>
                     </Box>
-                    <Divider></Divider>
                 </Flex>
-                <Stack direction={"row"}>{
-                    elements && elements.map((element, index) => {
-                        return (
-                            <Card maxW='sm' key={index}>
-                                <CardBody>
-                                    <Image
-                                        src={element.img}
-                                        alt='Green double couch with wooden legs'
-                                        borderRadius='lg'
-                                    />
-                                    <Stack mt='6' spacing='3'>
-                                        <Heading size='md'>Rating: {element.rating}/5</Heading>
-                                        <Text>
-                                            {element.review}
-                                        </Text>
-                                        <Text color='blue.600' fontSize='2xl'>
-                                        </Text>
-                                    </Stack>
-                                </CardBody>
-                            </Card>
-                        );
-                    })
+                <Divider></Divider>
 
-                }</Stack>
+                <Flex justifyContent="center" mt={8}>
+                    <Stack direction="row" spacing={4}>{
+                        elements && elements.map((element, index) => {
+                            return (
+                                <Card maxW='sm' key={index}>
+                                    <CardBody>
+                                        <Image
+                                            src={element.img}
+                                            alt='Immagine'
+                                            borderRadius='lg'
+                                        />
+                                        <Stack mt='6' spacing='3'>
+                                            <Heading size='md'>Rating: {element.rating}/5</Heading>
+                                            <Text>{element.review}</Text>
+                                            <Text color='blue.600' fontSize='2xl'></Text>
+                                        </Stack>
+                                    </CardBody>
+                                </Card>
+                            );
+                        })
+                    }</Stack>
+                </Flex>
             </>
         );
 };

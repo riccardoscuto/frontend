@@ -11,7 +11,7 @@ import { parseAbi, parseAbiItem } from "viem";
 export default function ProfilePage() {
   const { isConnected, address } = useAccount();
   const publicClient = usePublicClient();
-  const [username, setUsername] = useState("Test");
+  const [username, setUsername] = useState("User1");
   const [balanceUser, setBalanceUser] = useState(0);
   const [currentBalanceUser, setCurrentBalanceUser] = useState(0);
   const [newPlants, setPlants] = useState([])
@@ -107,38 +107,39 @@ export default function ProfilePage() {
   if (isConnected)
     return (
       <Flex alignItems={"start"}>
-        <Box p={4} justifyContent={"left"} marginLeft={12}>
-          <Center>
-            <Flex direction="column" alignItems="flex-start">
-              <Box w="200px" h="200px" borderRadius="full" overflow="hidden" bg={useColorModeValue("gray.200", "gray.700")} mb={3}>
-                <img src={image} alt="Profile" style={{ width: "100%" }} />
-              </Box>
-              <Text mb={2}>{username}</Text>
-              <div>All Claimable Token:{balanceUser}</div> 
-              <div>Current Token:{currentBalanceUser}</div>
-              <Edit username={username} image={image} setImage={setImage} setUsername={setUsername}></Edit>
-            </Flex>
-            <Flex flexDirection={"column"}>
-              <div> Minted Plants: {
-                newPlants && newPlants.map((element, index) => {
-                  return (<p key={index}>
-                    - New Plants: {element.plantId.toString()} Owner is: {element.plantOwner}
-                  </p>)
-                })}
-              </div>
-
-              <div> Leveled Up Plants: {
-                newLevels && newLevels.map((element, index) => {
-                  return (<p key={index}>
-                    - Plants {element.plantId.toString()} That  Made New Level: {element.newLevel.toString()}
-                  </p>)
-                })}
-              </div>
-            </Flex>
-          </Center>
-
+  <Box p={4} justifyContent={"left"} marginLeft={12}>
+    <Center>
+      <Flex direction="column" alignItems="flex-start">
+        <Box w="200px" h="200px" borderRadius="full" overflow="hidden" bg={useColorModeValue("gray.200", "gray.700")} mb={3}>
+          <img src={image} alt="Profile" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
         </Box>
+        <Text mb={2} fontSize="xl" fontWeight="bold">{username}</Text>
+        <div style={{ fontSize: "lg", fontWeight: "semibold" }}>All Claimable Token:{balanceUser}</div> 
+        <div style={{ fontSize: "lg", fontWeight: "semibold" }}>Current Token:{currentBalanceUser}</div>
+        <Edit username={username} image={image} setImage={setImage} setUsername={setUsername}></Edit>
       </Flex>
+      <Flex direction="row" align="flex-start" wrap="wrap" marginLeft={8}>
+        <Flex direction="column" mr={10}>
+          <Text fontSize="lg" fontWeight="bold" mb={2}>Minted Plants:</Text>
+          {newPlants && newPlants.map((element, index) => (
+            <Text key={index} fontSize="md" mb={1}>
+              - New Plants: {element.plantId.toString()} Owner is: {element.plantOwner}
+            </Text>
+          ))}
+        </Flex>
+        <Flex direction="column">
+          <Text fontSize="lg" fontWeight="bold" mb={2}>Leveled Up Plants:</Text>
+          {newLevels && newLevels.map((element, index) => (
+            <Text key={index} fontSize="md" mb={1}>
+              - Plants {element.plantId.toString()} That Made New Level: {element.newLevel.toString()}
+            </Text>
+          ))}
+        </Flex>
+      </Flex>
+    </Center>
+  </Box>
+</Flex>
+
     );
 };
 
@@ -180,7 +181,7 @@ function Edit({ username, image, setImage, setUsername }) {
   return (
     <>
       <Button size="sm" onClick={onOpen}>
-        Edit
+        Edit Username and Profile Picture
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

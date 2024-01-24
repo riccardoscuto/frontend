@@ -33,14 +33,7 @@ export function useWrite({ address, abi, functionName, args, enabled, value }) {
 
 
     useEffect(() => {
-        // if (prepareError)
-        // 	toast({
-        // 		title: 'Errore while preparing transaction ' + prepareError.name,
-        // 		description: prepareError.message,
-        // 		status: 'error',
-        // 		duration: 9000,
-        // 		isClosable: true,
-        // 	})
+
         if (error)
             toast({
                 title: 'Errore while preparing transaction ' + error.name,

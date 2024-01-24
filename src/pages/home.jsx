@@ -205,14 +205,39 @@ export default function Home() {
 								<Button onClick={mint}>
 									Mint plant
 								</Button>
-								{/* <MultiFeed mokupInfo={mockup} >
 
-								</MultiFeed> */}
 							</Flex>
-							{userInfo && <Progress width={"500px"} value={(((((Date.now() / 1000) - Number(userInfo.lastClaimTime.toString())) / 3600) / 48) * 100)} />}
-							{Math.round(((((Date.now() / 1000) - Number(userInfo.lastClaimTime.toString())) / 3600))) % 24}:
-							{Math.round(((((Date.now() / 1000) - Number(userInfo.lastClaimTime.toString())) / 60))) % 60}:
-							{Math.round(((((Date.now() / 1000) - Number(userInfo.lastClaimTime.toString()))))) % 60}
+							{userInfo && (
+								<div style={{ marginTop: '20px', width: '500px' }}>
+									<Progress
+										value={(((((Date.now() / 1000) - Number(userInfo.lastClaimTime.toString())) / 3600) / 48) * 100)}
+										colorScheme="teal"
+										height="30px" // Aumenta l'altezza della barra
+										borderRadius="15px" // Angoli arrotondati
+										style={{
+											background: `linear-gradient(
+                                                to right, 
+                                                #00C9FF 0%, 
+                                                #92FE9D ${(((((Date.now() / 1000) - Number(userInfo.lastClaimTime.toString())) / 3600) / 48) * 100)}%, 
+                                                #E8E8E8 ${(((((Date.now() / 1000) - Number(userInfo.lastClaimTime.toString())) / 3600) / 48) * 100)}%, 
+                                                #E8E8E8 100%
+                                            )`
+										}}
+									/>
+								</div>
+							)}
+
+							<div style={{
+								fontSize: '24px', 
+								fontWeight: 'bold', 
+								fontFamily: 'Courier New, monospace', // Cambia il font
+								margin: '20px 0' // Aggiungi margini
+							}}>
+								{Math.round(((((Date.now() / 1000) - Number(userInfo.lastClaimTime.toString())) / 3600))) % 24}:
+								{Math.round(((((Date.now() / 1000) - Number(userInfo.lastClaimTime.toString())) / 60))) % 60}:
+								{Math.round(((((Date.now() / 1000) - Number(userInfo.lastClaimTime.toString()))))) % 60}
+							</div>
+
 							<Flex width={"500px"} height={"500px"}>
 							</Flex>
 
