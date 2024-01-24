@@ -26,7 +26,7 @@ export function useWrite({ address, abi, functionName, args, enabled, value }) {
                 title: 'Transaction ' + functionName + ' executed ' + data.hash,
                 description: "We've created your account for you.",
                 status: 'success',
-                duration: 9000,
+                duration: 6000,
                 isClosable: true,
             })
     }, [data])
@@ -46,7 +46,7 @@ export function useWrite({ address, abi, functionName, args, enabled, value }) {
                 title: 'Errore while preparing transaction ' + error.name,
                 description: error.message,
                 status: 'error',
-                duration: 9000,
+                duration: 6000,
                 isClosable: true,
             })
     }, [prepareError, error])

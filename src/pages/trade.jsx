@@ -1,31 +1,44 @@
 import React, { useState } from 'react';
 import {
-    ChakraProvider, Box, Grid, Image, Text, Button, VStack, HStack, Badge, Flex, Modal,
-    ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure
+    ChakraProvider, Box, Grid, Image, Text, Button, VStack, HStack, Flex, Modal,
+    ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure, Center
 } from '@chakra-ui/react';
 import { useAccount } from "wagmi";
 
-const nftData = [
-    { id: 1, image: '', price: 500, amount: 1, borderColor: '#ffbe0b' },
-    { id: 2, image: 'path-to-your-image-2', price: 1000, amount: 2, borderColor: '#fb5607' },
-    { id: 3, image: 'path-to-your-image-3', price: 1500, amount: 4, borderColor: '#ff006e' },
-    { id: 4, image: 'path-to-your-image-4', price: 1800, amount: 7, borderColor: '#8338ec' },
-    { id: 5, image: 'path-to-your-image-5', price: 2000, amount: 10, borderColor: '#3a86ff' },
+
+const initialcouponData = [
+    { id: 1, image: '/discount1.png', price: 500, amount: 10+"$", borderColor: '#ffbe0b' },
+    { id: 2, image: '/discount2.png', price: 1000, amount: 15+"$", borderColor: '#fb5607' },
+    { id: 3, image: '/discount3.png', price: 2000, amount: 30+"$", borderColor: '#ff006e' },
 ];
 
-export default function NFTShop() {
+const initialShops = [
+    { id: 1, name: 'Sunflower E-Shop', image: '/shop1.png', claimed: false },
+    { id: 2, name: 'OceanWave Electronics', image: '/shop2.png', claimed: false },
+    { id: 3, name: 'DigitalSunset', image: '/shop3.png', claiminitialcouponed: false },
+    { id: 4, name: 'Datastream Mako', image: '/shop4.png', claimed: false },
+    { id: 5, name: 'GreenByte Store', image: '/shop5.png', claimed: false },
+];
+
+export default function couponShop() {
     const { isConnected } = useAccount();
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [claimed, setClaimed] = useState(Array(nftData.length).fill(false));
+    const [couponData] = useState(initialcouponData);
+    const [shopData, setShopData] = useState(initialShops.map(shop => ({ ...shop, claimed: false })));
 
-    const handleBuy = (price, amount) => {
-        console.log(`Buying ${amount} NFT(s) for ${price} tokens`);
+    const resetShops = () => {
+        setShopData(initialShops.map(shop => ({ ...shop, claimed: false })));
     };
 
-    const handleClaim = (index) => {
-        let newClaimed = [...claimed];
-        newClaimed[index] = true;
-        setClaimed(newClaimed);
+    const handleBuy = () => {
+        resetShops();
+        onOpen();
+    };
+
+    const handleClaim = (shopIndex) => {
+        let newShopData = [...shopData];
+        newShopData[shopIndex].claimed = true;
+        setShopData(newShopData);
     };
 
     if (!isConnected) {
@@ -40,23 +53,21 @@ export default function NFTShop() {
         <ChakraProvider>
             <Box p={5} maxW="1200px" mx="auto">
                 <VStack spacing={5}>
-                    <Text fontSize="2xl" fontWeight="bold">NFT Shop</Text>
-                    <Grid templateColumns="repeat(5, 1fr)" gap={6}>
-                        {nftData.map((nft) => (
-                            <VStack key={nft.id} p={4} borderRadius="md"  boxShadow="md" border="2px" borderColor={nft.borderColor}align="center" bg="transparent">
-                                <Image src={nft.image} borderRadius="md" boxSize="150px" />
-                                <Text fontWeight="bold">Price: {nft.price} Tokens</Text>
-                                <HStack>
-                                    
-                                    <Text>{nft.amount} NFT(s)</Text>
-                                </HStack>
-                                <Button colorScheme="teal" onClick={() => handleBuy(nft.price, nft.amount)}>
-                                    Buy
-                                </Button>
-                            </VStack>
-                        ))}
-                    </Grid>
-                    <Button colorScheme="pink" onClick={onOpen}>Claim Coupon</Button>
+                    <Text fontSize="2xl" fontWeight="bold">Trade Coupon</Text>
+                    <Center>
+                        <HStack spacing={6} justify="center">
+                            {couponData.map((coupon, index) => (
+                                <VStack key={coupon.id} p={4} borderRadius="md" boxShadow="md" border="2px" borderColor={coupon.borderColor} align="center" bg="transparent">
+                                    <Image src={coupon.image} borderRadius="md" boxSize="150px" />
+                                    <Text fontWeight="bold">Price: {coupon.price} Tokens</Text>
+                                    <Text>{coupon.amount}</Text>
+                                    <Button colorScheme="teal" onClick={handleBuy}>
+                                        Buy
+                                    </Button>
+                                </VStack>
+                            ))}
+                        </HStack>
+                    </Center>
                 </VStack>
 
                 <Modal isOpen={isOpen} onClose={onClose}>
@@ -66,16 +77,18 @@ export default function NFTShop() {
                         <ModalCloseButton />
                         <ModalBody>
                             <VStack spacing={4}>
-                                {nftData.map((item, index) => (
-                                    <Flex key={item.id} justify="space-between" align="center" w="full" p={2}>
-                                        <Image src={item.logo} boxSize="50px" borderRadius="full" alt={`Logo ${item.id}`} />
-                                        <Text>Shop {item.id}</Text>
+                                {shopData.map((shop, index) => (
+                                    <Flex key={shop.id} direction="row" justify="space-around" align="center" w="full" p={2}>
+                                        <Image src={shop.image} boxSize="50px" borderRadius="full" alt={`Logo ${shop.name}`} />
+                                        <Center flex="1">
+                                            <Text>{shop.name}</Text>
+                                        </Center>
                                         <Button
                                             colorScheme="teal"
                                             onClick={() => handleClaim(index)}
-                                            isDisabled={claimed[index]}
+                                            isDisabled={shop.claimed}
                                         >
-                                            {claimed[index] ? 'Claimed' : 'Claim'}
+                                            {shop.claimed ? 'Claimed' : 'Claim'}
                                         </Button>
                                     </Flex>
                                 ))}

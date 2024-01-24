@@ -26,8 +26,6 @@ export default function Home() {
 	const publicClient = usePublicClient();
 	const [idPlant, setIdPlant] = useState(0);
 	const [arrayPlant, setArrayPlant] = useState([]);
-	const toast = useToast();
-
 	useEffect(() => {
 		(async () => {
 			const data = await getUserInfo(publicClient, address);
