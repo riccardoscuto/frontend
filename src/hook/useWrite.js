@@ -24,7 +24,7 @@ export function useWrite({ address, abi, functionName, args, enabled, value }) {
         if (data && data.hash)
             toast({
                 title: 'Transaction ' + functionName + ' executed ' + data.hash,
-                description: "We've created your account for you.",
+                description: "Success!",
                 status: 'success',
                 duration: 6000,
                 isClosable: true,
@@ -46,7 +46,7 @@ export function useWrite({ address, abi, functionName, args, enabled, value }) {
                 title: 'Errore while preparing transaction ' + error.name,
                 description: error.message,
                 status: 'error',
-                duration: 6000,
+                duration: 4000,
                 isClosable: true,
             })
     }, [prepareError, error])

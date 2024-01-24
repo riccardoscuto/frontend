@@ -1,39 +1,90 @@
 import { Box, Button, Input, ListItem, UnorderedList, VStack, Flex, Spacer, Text, Center } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useAccount } from "wagmi";
+import { useWrite } from "../hook/useWrite";
+import contract from "../constants/contract";
+import { getPlantAddress } from "../lib/info";
+import { usePublicClient } from "wagmi";
+import { parseAbiItem } from "viem";
+
 
 const RedeemCode = () => {
     const { isConnected } = useAccount()
     const [inputCode, setInputCode] = useState('');
     const [redeemedCodes, setRedeemedCodes] = useState([]);
     const [error, setError] = useState('');
+    const publicClient = usePublicClient();
+    publicClient.watchEvent({
+        pollingInterval:300,
+        address: contract.market.address,
+        event: parseAbiItem("event CouponUsed(address userAddress, uint256 feedTokens)"),
+        onLogs: (logs) => {
+            setRedeemedCodes((prev) => {
+                const txHash = logs[0].transactionHash;
+                const isInserted = prev.find((element) => {
+                    return element.txHash == txHash;
+                })
+                if (!isInserted) {
+                    return [...prev, { userAddress: logs[0].args.userAddress, feedTokens: logs[0].args.feedTokens, txHash: txHash },]
+                } else return prev;
+            });
+        },
+
+
+    })
 
     useEffect(() => {
-        const storedCodes = localStorage.getItem('redeemedCodes');
-        if (storedCodes) {
-            setRedeemedCodes(JSON.parse(storedCodes));
-        }
-    }, []);
+        (async () => {
+            const logs = await publicClient.getLogs({
+                address: contract.market.address,
+                event: parseAbiItem("event CouponUsed(address userAddress, uint256 feedTokens)"),
+                fromBlock: 0n
+            })
+            for (let event of logs) {
+                setRedeemedCodes((prev) => {
+                    const txHash = event.transactionHash;
+                    const isInserted = prev.find((element) => {
+                        return element.txHash == txHash;
+                    })
+                    if (!isInserted) {
+                        return [...prev, { userAddress: event.args.userAddress, feedTokens: event.args.feedTokens, txHash: txHash },]
+                    } else return prev
+                })
+            }
+        })()
 
-    const handleRedeem = () => {
-        const alphanumericRegex = /^[a-zA-Z0-9]{12}$/;
-        if (inputCode.length > 12) {
-            const excessDigits = inputCode.length - 12;
-            setError(`Enter a 12-character alphanumeric code, you entered ${excessDigits} extra digits`);
-        } else if (inputCode.length < 12) {
-            const missingDigits = 12 - inputCode.length;
-            setError(`Enter a 12-character alphanumeric code, ${missingDigits} digits are missing`);
-        } else if (alphanumericRegex.test(inputCode)) {
-            const updatedCodes = [...redeemedCodes, inputCode];
-            setRedeemedCodes(updatedCodes);
-            setError('');
-            setInputCode('');
 
-            localStorage.setItem('redeemedCodes', JSON.stringify(updatedCodes));
-        } else {
-            setError('Enter a 12-character alphanumeric code');
+    }, [])
+
+
+
+    // const validateCode = (code) => {
+    //     if (code.length == 6)
+    //         return true;
+    //     else return false;
+    // }
+    const handleRedeem = (code) => {
+        const alphanumericRegex = /^[a-zA-Z0-9]{6}$/;
+        if (code.length == 6 && alphanumericRegex.test(code)) {
+            return true;
         }
+        return false;
     };
+    const redeemCodeTransaction = useWrite({
+        abi: contract.market.abi,
+        address: contract.market.address,
+        args: [inputCode],
+        enabled: handleRedeem(inputCode),
+        functionName: "useCoupon",
+        value: BigInt(0)
+    });
+    const useCoupon = async () => {
+        console.log("codice riscattato");
+        //console.log(await getPlantAddress(publicClient))
+        await redeemCodeTransaction.write?.();
+    };
+
+
 
     const redeemedCount = redeemedCodes.length; // Conteggio dei codici riscattati
 
@@ -56,9 +107,10 @@ const RedeemCode = () => {
                     />
                     <Button
                         colorScheme="yellow"
-                        onClick={handleRedeem}
+                        onClick={useCoupon}
                         size={['md', 'lg']}
                         ml={[0, 4]}
+
                     >
                         Redeem
                     </Button>
@@ -74,7 +126,7 @@ const RedeemCode = () => {
                     </Text>
                     <UnorderedList styleType="disc" pl={4} fontSize={['md', 'lg']}>
                         {redeemedCodes.map((code, index) => (
-                            <ListItem key={index}>{code}</ListItem>
+                            <ListItem key={index}>{code.userAddress} gained: {code.feedTokens.toString()}</ListItem>
                         ))}
                     </UnorderedList>
                 </VStack>

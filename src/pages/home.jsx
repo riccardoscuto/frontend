@@ -3,7 +3,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import { useAccount, usePublicClient } from "wagmi";
 import ModalImg, { ModalStatPlant } from "../Components/StatPlant";
-import MultiFeed from "../Components/MultiFeed";
+// import MultiFeed from "../Components/MultiFeed";
 import { Card, CardBody, CardFooter, useMediaQuery } from '@chakra-ui/react'
 import { Link as ChakraLink } from '@chakra-ui/react';
 import { Link as ReactRouterLink } from 'react-router-dom';
@@ -68,41 +68,41 @@ export default function Home() {
 	}, 500)
 
 	const levelUpTransaction = useWrite({
-		abi: contract.abi,
-		address: contract.address,
+		abi: contract.plant.abi,
+		address: contract.plant.address,
 		args: [idPlant],
-		enabled: true,
+		enabled: isOpen && userInfo && userInfo.feedTokens >= 100n && (arrayPlant[indexPlant].level < 5n),
 		functionName: "levelUp",
 		value: BigInt(0)
 	});
-	
+
 	const claimTransaction = useWrite({
-		abi: contract.abi,
-		address: contract.address,
+		abi: contract.plant.abi,
+		address: contract.plant.address,
 		args: [100n],
-		enabled: true,
+		enabled: userInfo && userInfo.isStarted ,
 		functionName: "addFeedTokens",
 		value: BigInt(0)
 	})
 
 	const mintTransaction = useWrite({
-		abi: contract.abi,
-		address: contract.address,
+		abi: contract.plant.abi,
+		address: contract.plant.address,
 		args: [],
-		enabled: true,
+		enabled: userInfo && userInfo.feedTokens >= 100n,
 		functionName: "mintPlant",
 		value: BigInt(0)
 	})
 
 	const startUserTransaction = useWrite({
-		abi: contract.abi,
-		address: contract.address,
+		abi: contract.plant.abi,
+		address: contract.plant.address,
 		args: [],
 		enabled: userInfo && !userInfo.isStarted,
 		functionName: "startUser",
 		value: BigInt(0)
 	});
-	
+
 
 
 	const levelUp = async () => {
@@ -112,13 +112,13 @@ export default function Home() {
 	const switchRight = () => {
 		if (indexPlant < (arrayPlant.length - 1)) {
 			setIndex(indexPlant + 1);
-			setIdPlant(arrayPlant[indexPlant+1].id)
+			setIdPlant(arrayPlant[indexPlant + 1].id)
 		}
 	}
 	const switchLeft = () => {
 		if (indexPlant != 0) {
 			setIndex(indexPlant - 1);
-			setIdPlant(arrayPlant[indexPlant-1].id)
+			setIdPlant(arrayPlant[indexPlant - 1].id)
 		}
 	}
 	const startUser = async () => {
@@ -176,7 +176,7 @@ export default function Home() {
 									))}
 							</Splide>
 							{arrayPlant.length > 0 && <ModalStatPlant plant={arrayPlant[indexPlant]} isOpen={isOpen}
-								onClose={onClose} levelUp={levelUp} switchLeft={switchLeft} switchRight={switchRight} />
+								onClose={onClose} levelUp={levelUp} switchLeft={switchLeft} switchRight={switchRight} isActive={isOpen && userInfo && userInfo.feedTokens >= 100n && (arrayPlant[indexPlant].level < 5n)} />
 							}
 							<Flex width="100%" gap={10} direction={"row"} justifyContent={"center"}>
 								<Button>
@@ -190,9 +190,9 @@ export default function Home() {
 								<Button onClick={mint}>
 									Mint plant
 								</Button>
-								<MultiFeed mokupInfo={mockup} >
+								{/* <MultiFeed mokupInfo={mockup} >
 
-								</MultiFeed>
+								</MultiFeed> */}
 							</Flex>
 						</Container >
 					</>

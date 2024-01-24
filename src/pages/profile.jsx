@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box, Button, Center, Flex, Input, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Stack, Text, useColorModeValue, StatNumber, useDisclosure, useInterval
 } from "@chakra-ui/react";
 import { useAccount, usePublicClient } from "wagmi";
 import { getBalance, getUserInfo } from "../lib/info";
+import contract from "../constants/contract";
+import { parseAbi, parseAbiItem } from "viem";
 
 
 export default function ProfilePage() {
@@ -12,6 +14,9 @@ export default function ProfilePage() {
   const [username, setUsername] = useState("Test");
   const [balanceUser, setBalanceUser] = useState(0);
   const [currentBalanceUser, setCurrentBalanceUser] = useState(0);
+  const [newPlants, setPlants] = useState([])
+  const [newLevels, setLevels] = useState([])
+
   const [image, setImage] = useState("https://via.placeholder.com/200");
   useInterval(() => {
 
@@ -24,6 +29,79 @@ export default function ProfilePage() {
       //console.log(data2)
     })()
   }, 500)
+
+
+  publicClient.watchEvent({
+    pollingInterval: 100,
+    address: contract.plant.address,
+    events: parseAbi(["event NewPlant(address plantOwner, uint256 plantId)", "event LevelUp(uint256 plantId, uint256 newLevel)"]),
+    onLogs: (logs) => {
+      console.log(logs)
+      if (logs[0].eventName == "NewPlant") {
+        setPlants((prev) => {
+          const txHash = logs[0].transactionHash;
+          const isInserted = prev.find((element) => {
+            return element.txHash == txHash;
+          })
+          if (!isInserted) {
+            console.log([...prev, { plantId: logs[0].args.plantId, plantOwner: logs[0].args.plantOwner, },])
+            return [...prev, { plantId: logs[0].args.plantId, plantOwner: logs[0].args.plantOwner, txHash: txHash },]
+          } else return prev;
+        });
+      } if (logs[0].eventName == "LevelUp") {
+        setLevels((prev) => {
+          const txHash = logs[0].transactionHash;
+          const isInserted = prev.find((element) => {
+            return element.txHash == txHash;
+          })
+          if (!isInserted) {
+            console.log([...prev, { plantId: logs[0].args.plantId, newLevel: logs[0].args.newLevel, },])
+            return [...prev, { plantId: logs[0].args.plantId, newLevel: logs[0].args.newLevel, txHash: txHash },]
+          } else return prev;
+        });
+      }
+    },
+
+
+  })
+
+
+
+  useEffect(() => {
+    (async () => {
+      const logs = await publicClient.getLogs({
+        address: contract.plant.address,
+        events: parseAbi(["event NewPlant(address plantOwner, uint256 plantId)", "event LevelUp(uint256 plantId, uint256 newLevel)"]),
+        fromBlock: 0n
+      })
+      for (let event of logs) {
+        if (event.eventName == "NewPlant") {
+          setPlants((prev) => {
+            const txHash = event.transactionHash;
+            const isInserted = prev.find((element) => {
+              return element.txHash == txHash;
+            })
+            if (!isInserted) {
+              console.log([...prev, { plantId: event.args.plantId, plantOwner: event.args.plantOwner, },])
+              return [...prev, { plantId: event.args.plantId, plantOwner: event.args.plantOwner, txHash: txHash },]
+            } else return prev;
+          });
+        } if (event.eventName == "LevelUp") {
+          setLevels((prev) => {
+            const txHash = event.transactionHash;
+            const isInserted = prev.find((element) => {
+              return element.txHash == txHash;
+            })
+            if (!isInserted) {
+              console.log([...prev, { plantId: event.args.plantId, newLevel: event.args.newLevel, },])
+              return [...prev, { plantId: event.args.plantId, newLevel: event.args.newLevel, txHash: txHash },]
+            } else return prev;
+          });
+        }
+      }
+    })()
+  }, [])
+
 
 
   if (isConnected)
@@ -39,6 +117,23 @@ export default function ProfilePage() {
               <div>All Token:{balanceUser}</div>
               <div>Current Token:{currentBalanceUser}</div>
               <Edit username={username} image={image} setImage={setImage} setUsername={setUsername}></Edit>
+            </Flex>
+            <Flex flexDirection={"column"}>
+              <div> Minted Plants: {
+                newPlants && newPlants.map((element, index) => {
+                  return (<p key={index}>
+                    - New Plants: {element.plantId.toString()} Owner is: {element.plantOwner}
+                  </p>)
+                })}
+              </div>
+
+              <div> Leveled Up Plants: {
+                newLevels && newLevels.map((element, index) => {
+                  return (<p key={index}>
+                    - Plants {element.plantId.toString()} That  Made New Level: {element.newLevel.toString()}
+                  </p>)
+                })}
+              </div>
             </Flex>
           </Center>
 
