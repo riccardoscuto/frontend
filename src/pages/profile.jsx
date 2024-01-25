@@ -114,7 +114,6 @@ export default function ProfilePage() {
           <img src={image} alt="Profile" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
         </Box>
         <Text mb={2} fontSize="xl" fontWeight="bold">{username}</Text>
-        <div style={{ fontSize: "lg", fontWeight: "semibold" }}>All Claimable Token:{balanceUser}</div> 
         <div style={{ fontSize: "lg", fontWeight: "semibold" }}>Current Token:{currentBalanceUser}</div>
         <Edit username={username} image={image} setImage={setImage} setUsername={setUsername}></Edit>
       </Flex>
