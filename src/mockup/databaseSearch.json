@@ -1,91 +1,107 @@
 [{
         "tag": ["glasses"],
-        "review": "The SolarView Classic Shades offer both style and functionality. The polarized lenses provide excellent UV protection and reduce glare, making them perfect for driving or beach outings. Their classic design complements various face shapes, and the build quality feels premium. Lightweight yet durable, they’re comfortable to wear all day. An excellent choice for anyone seeking both fashion and practicality.",
+        "review": "Sunflower E-Shop.",
+        "name": "SolarView Classic Shades",
         "rating": 5,
         "img": "/glasses1.png"
 
     },
     {
         "tag": ["glasses"],
-        "review": "Ideal for athletes, the AquaBlue Sports Sunglasses feature a wrap-around design that ensures they stay securely in place during vigorous activities. The lenses offer clear vision and are scratch-resistant. However, they might be too sporty for casual wear. The ventilation feature prevents fogging, a big plus for runners and cyclists. A solid choice for active lifestyles.",
+        "review": "GreenByte Store",
+        "name": "SolarView Classic Shades",
         "rating": 4,
+
         "img": "/glasses2.png"
     },
     {
         "tag": ["glasses"],
-        "review": "The RetroSpecs Vintage Frames stand out with their unique retro design. While they score high on style, the lack of polarization and UV protection makes them less suitable for intense sunlight exposure. They’re more of a fashion accessory than a functional pair of sunglasses. Suitable for those who prioritize style over functionality.",
+        "review": "Datastream Mako",
+        "name": "SolarView Classic Shades",
         "rating": 2.5,
         "img": "/glasses2.png"
     },
     {
         "tag": ["blender"],
-        "review": "The PowerMax 5000 Blender is a true gem for any kitchen. With its powerful 1500-watt motor and ultra-sharp stainless steel blades, it blends anything effortlessly. Whether it’s thick protein shakes or creamy soups, the outcome is always perfect. Its 2-liter jug is great for large batch preparations, and its durability is impressive.",
+        "review": "Sunflower E-Shop",
+        "name": "SolarView Classic Shades",
         "rating": 5,
         "img": "/blender1.png"
     },
     {
         "tag": ["blender"],
-        "review": "The EcoBlend 300 Blender is a solid choice for those on a budget. Its 500-watt motor is adequate for most basic blending tasks like smoothies and sauces. The blades are sharp enough, and the blender is fairly easy to clean. However, the 1-liter plastic jug doesn’t feel very sturdy and might not withstand heavy use over time. Another downside is the relatively high noise level during operation. It’s a decent pick for occasional use or for those who don’t need advanced features.",
+        "review": "DigitalSunset",
+        "name": "SolarView Classic Shades",
         "rating": 3,
         "img": "/blender2.png"
     },
     {
         "tag": ["blender"],
-        "review": "The Multiblend Deluxe 800 strikes a good balance between high performance and reasonable price. Its 800-watt motor handles most ingredients well, though it might struggle a bit with particularly hard or fibrous items. Its preset functions for smoothies, crushed ice, and soups are quite handy and user-friendly. The glass jug adds to its durability and aesthetic appeal. A minor drawback is that it’s a bit on the heavier side, making it less portable. A great choice for those who want versatility without breaking the bank.",
+        "review": "GreenByte Store",
+        "name": "SolarView Classic Shades",
         "rating": 4,
         "img": "/blender3.png"
     },
     {
         "tag": ["microwave"],
-        "review": "The QuickHeat Compact Microwave is a top performer in its category. Its intuitive controls and efficient heating make it a breeze to use. The compact size is perfect for small kitchens, yet it’s spacious enough inside to accommodate large plates. The defrost function works exceptionally well. A great appliance that combines functionality with space-saving design.",
+        "review": "GreenByte Store",
+        "name": "SolarView Classic Shades",
         "rating": 5,
         "img": "/microwave1.png"
     },
     {
         "tag": ["microwave"],
-        "review": "The ChefPro Digital Microwave is feature-rich, offering various presets for different types of food. The inverter technology ensures even cooking and reheating. It’s a bit bulky, which might be an issue for smaller spaces. The sleek design and digital display add to its modern appeal. Ideal for those who need a versatile and powerful microwave.",
+        "review": "DigitalSunset",
+        "name": "SolarView Classic Shades",
         "rating": 4.5,
         "img": "/microwave2.png"
     },
     {
         "tag": ["microwave"],
-        "review": "The EconoWave Basic Microwave is a budget-friendly option that covers all the basics. While it lacks advanced features, it heats food evenly and is simple to operate. The build quality isn't top-notch, but it’s acceptable for the price. Suitable for students or those who need a straightforward, no-frills microwave.",
+        "review": "Datastream Mako",
+        "name": "SolarView Classic Shades",
         "rating": 3.5,
         "img": "/microwave3.png"
     },
     {
         "tag": ["hat"],
-        "review": "The UrbanTrend Fedora is a stylish hat that adds sophistication to any outfit. Made with high-quality materials, it holds its shape well and provides excellent sun protection. It’s comfortable to wear and fits true to size. A great choice for fashion-forward individuals.",
+        "review": "GreenByte Store",
+        "name": "SolarView Classic Shades",
         "rating": 5,
         "img": "/hat1.png"
     },
     {
         "tag": ["hat"],
-        "review": "Designed for the outdoors, the AdventurePro Hat is both durable and functional. It’s water-resistant and offers UV protection, making it ideal for hiking or fishing trips. The design might not appeal to everyone, but its practicality is undeniable.",
+        "review": "Datastream Mako",
+        "name": "SolarView Classic Shades",
         "rating": 4,
         "img": "/hat2.png"
     },
     {
         "tag": ["hat"],
         "review": "The ClassicKnit Beanie is a simple yet effective option for colder weather. It’s soft, comfortable, and comes in a variety of colors. While it lacks the more advanced thermal properties of specialized winter hats, it’s sufficient for everyday use in mild to moderate cold conditions.",
+        "name": "SolarView Classic Shades",
         "rating": 3.5,
         "img": "/hat3.png"
     },
     {
         "tag": ["wine"],
-        "review": "This exquisite Cabernet Sauvignon from Château Prestige is a true masterpiece. With its deep, rich flavors of dark berries and a hint of oak, it pairs beautifully with red meats and robust cheeses. The balance of tannins and acidity is perfect, making it a delightful experience for any wine enthusiast.",
+        "review": "Datastream Mako",
+        "name": "SolarView Classic Shades",
         "rating": 5,
         "img": "/wine1.png"
     },
     {
         "tag": ["wine"],
-        "review": "The ValleyBreeze Pinot Noir is a versatile and approachable wine. It offers a smooth, fruity palate with subtle earthy undertones. While it doesn’t have the complexity of higher-end Pinot Noirs, it’s a great everyday wine that pairs well with a variety of dishes.",
+        "review": "DigitalSunset",
+        "name": "SolarView Classic Shades",
         "rating": 5,
         "img": "/wine2.png"
     },
     {
         "tag": ["wine"],
-        "review": "GoldenHills Chardonnay is a decent option for those who prefer a lighter, crisper white wine. It has notes of green apple and citrus, with a moderately oaky finish. It’s a bit simple in terms of flavor profile, but still enjoyable, especially on a warm day.",
+        "review": "Sunflower E-Shop",
+        "name": "SolarView Classic Shades",
         "rating": 3,
         "img": "/wine3.png"
     }

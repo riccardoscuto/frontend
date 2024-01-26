@@ -210,7 +210,7 @@ export default function Home() {
 							{userInfo && (
 								<div style={{ marginTop: '20px', width: '500px' }}>
 									<Progress
-										value={(((((Date.now() / 1000) - Number(userInfo.lastClaimTime.toString())) / 3600) / 48) * 100)}
+										value={Math.max(0,(((((Date.now() / 1000) - Number(userInfo.lastClaimTime.toString())) / 3600) / 48) * 100))}
 										colorScheme="teal"
 										height="30px" // Aumenta l'altezza della barra
 										borderRadius="15px" // Angoli arrotondati
@@ -233,9 +233,9 @@ export default function Home() {
 								fontFamily: 'Courier New, monospace', // Cambia il font
 								margin: '20px 0' // Aggiungi margini
 							}}>
-								{Math.round(((((Date.now() / 1000) - Number(userInfo.lastClaimTime.toString())) / 3600))) % 24}:
-								{Math.round(((((Date.now() / 1000) - Number(userInfo.lastClaimTime.toString())) / 60))) % 60}:
-								{Math.round(((((Date.now() / 1000) - Number(userInfo.lastClaimTime.toString()))))) % 60}
+								{Math.max(0,Math.round(((((Date.now() / 1000) - Number(userInfo.lastClaimTime.toString())) / 3600))) % 24)}:
+								{Math.max(0,Math.round(((((Date.now() / 1000) - Number(userInfo.lastClaimTime.toString())) / 60))) % 60)}:
+								{Math.max(0,Math.round(((((Date.now() / 1000) - Number(userInfo.lastClaimTime.toString()))))) % 60)}
 							</div>
 
 							<Flex width={"500px"} height={"500px"}>

@@ -39,8 +39,11 @@ export default function Review() {
                                             borderRadius='lg'
                                         />
                                         <Stack mt='6' spacing='3'>
+                                            <Heading>{element.review}</Heading>
+                                            <Heading size='md'>Product Name: </Heading>
+                                            <Text color="#505423">{element.name}</Text>
                                             <Heading size='md'>Rating: {element.rating}/5</Heading>
-                                            <Text>{element.review}</Text>
+
                                             <Text color='blue.600' fontSize='2xl'></Text>
                                         </Stack>
                                     </CardBody>
