@@ -9,7 +9,7 @@
     {
         "tag": ["glasses"],
         "review": "GreenByte Store",
-        "name": "SolarView Classic Shades",
+        "name": " AquaBlue Sports ",
         "rating": 4,
 
         "img": "/glasses2.png"
@@ -17,91 +17,91 @@
     {
         "tag": ["glasses"],
         "review": "Datastream Mako",
-        "name": "SolarView Classic Shades",
+        "name": "RetroSpecs Vintage Frames",
         "rating": 2.5,
         "img": "/glasses2.png"
     },
     {
         "tag": ["blender"],
         "review": "Sunflower E-Shop",
-        "name": "SolarView Classic Shades",
+        "name": " PowerMax 5000",
         "rating": 5,
         "img": "/blender1.png"
     },
     {
         "tag": ["blender"],
         "review": "DigitalSunset",
-        "name": "SolarView Classic Shades",
+        "name": "EcoBlend 300",
         "rating": 3,
         "img": "/blender2.png"
     },
     {
         "tag": ["blender"],
         "review": "GreenByte Store",
-        "name": "SolarView Classic Shades",
+        "name": "Multiblend Deluxe 800 ",
         "rating": 4,
         "img": "/blender3.png"
     },
     {
         "tag": ["microwave"],
         "review": "GreenByte Store",
-        "name": "SolarView Classic Shades",
+        "name": " QuickHeat Compact Microwave",
         "rating": 5,
         "img": "/microwave1.png"
     },
     {
         "tag": ["microwave"],
         "review": "DigitalSunset",
-        "name": "SolarView Classic Shades",
+        "name": "ChefPro Digital Microwave",
         "rating": 4.5,
         "img": "/microwave2.png"
     },
     {
         "tag": ["microwave"],
         "review": "Datastream Mako",
-        "name": "SolarView Classic Shades",
+        "name": "EconoWave Basic Microwave ",
         "rating": 3.5,
         "img": "/microwave3.png"
     },
     {
         "tag": ["hat"],
         "review": "GreenByte Store",
-        "name": "SolarView Classic Shades",
+        "name": "UrbanTrend Fedora",
         "rating": 5,
         "img": "/hat1.png"
     },
     {
         "tag": ["hat"],
         "review": "Datastream Mako",
-        "name": "SolarView Classic Shades",
+        "name": "AdventurePro Outdoor Hat",
         "rating": 4,
         "img": "/hat2.png"
     },
     {
         "tag": ["hat"],
-        "review": "The ClassicKnit Beanie is a simple yet effective option for colder weather. It’s soft, comfortable, and comes in a variety of colors. While it lacks the more advanced thermal properties of specialized winter hats, it’s sufficient for everyday use in mild to moderate cold conditions.",
-        "name": "SolarView Classic Shades",
+        "review": "DigitalSunset",
+        "name": "ClassicKnit Beanie",
         "rating": 3.5,
         "img": "/hat3.png"
     },
     {
         "tag": ["wine"],
         "review": "Datastream Mako",
-        "name": "SolarView Classic Shades",
+        "name": "Château Prestige Cabernet Sauvignon",
         "rating": 5,
         "img": "/wine1.png"
     },
     {
         "tag": ["wine"],
         "review": "DigitalSunset",
-        "name": "SolarView Classic Shades",
+        "name": "ValleyBreeze Pinot Noir",
         "rating": 5,
         "img": "/wine2.png"
     },
     {
         "tag": ["wine"],
         "review": "Sunflower E-Shop",
-        "name": "SolarView Classic Shades",
+        "name": "GoldenHills Chardonnay",
         "rating": 3,
         "img": "/wine3.png"
     }
