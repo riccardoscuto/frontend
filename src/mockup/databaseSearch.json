@@ -1,8 +1,8 @@
 [{
         "tag": ["glasses"],
-        "review": "Sunflower E-Shop.",
+        "review": "Sunflower E-Shop",
         "name": "SolarView Classic Shades",
-        "rating": 5,
+        "rating": "/star45.png",
         "img": "/glasses1.png"
 
     },
@@ -10,99 +10,98 @@
         "tag": ["glasses"],
         "review": "GreenByte Store",
         "name": " AquaBlue Sports ",
-        "rating": 4,
-
+        "rating": "/star3.png",
         "img": "/glasses2.png"
     },
     {
         "tag": ["glasses"],
         "review": "Datastream Mako",
         "name": "RetroSpecs Vintage Frames",
-        "rating": 2.5,
-        "img": "/glasses2.png"
+        "rating": "/star45.png",
+        "img": "/glasses3.png"
     },
     {
         "tag": ["blender"],
         "review": "Sunflower E-Shop",
         "name": " PowerMax 5000",
-        "rating": 5,
+        "rating": "/star5.png",
         "img": "/blender1.png"
     },
     {
         "tag": ["blender"],
         "review": "DigitalSunset",
         "name": "EcoBlend 300",
-        "rating": 3,
+        "rating": "/star3.png",
         "img": "/blender2.png"
     },
     {
         "tag": ["blender"],
         "review": "GreenByte Store",
         "name": "Multiblend Deluxe 800 ",
-        "rating": 4,
+        "rating": "/star45.png",
         "img": "/blender3.png"
     },
     {
         "tag": ["microwave"],
         "review": "GreenByte Store",
         "name": " QuickHeat Compact Microwave",
-        "rating": 5,
+        "rating": "/star5.png",
         "img": "/microwave1.png"
     },
     {
         "tag": ["microwave"],
         "review": "DigitalSunset",
         "name": "ChefPro Digital Microwave",
-        "rating": 4.5,
+        "rating": "/star3.png",
         "img": "/microwave2.png"
     },
     {
         "tag": ["microwave"],
         "review": "Datastream Mako",
         "name": "EconoWave Basic Microwave ",
-        "rating": 3.5,
+        "rating": "/star45.png",
         "img": "/microwave3.png"
     },
     {
         "tag": ["hat"],
         "review": "GreenByte Store",
         "name": "UrbanTrend Fedora",
-        "rating": 5,
+        "rating": "/star45.png",
         "img": "/hat1.png"
     },
     {
         "tag": ["hat"],
         "review": "Datastream Mako",
         "name": "AdventurePro Outdoor Hat",
-        "rating": 4,
+        "rating": "/star5.png",
         "img": "/hat2.png"
     },
     {
         "tag": ["hat"],
         "review": "DigitalSunset",
         "name": "ClassicKnit Beanie",
-        "rating": 3.5,
+        "rating": "/star3.png",
         "img": "/hat3.png"
     },
     {
         "tag": ["wine"],
         "review": "Datastream Mako",
         "name": "Château Prestige Cabernet Sauvignon",
-        "rating": 5,
+        "rating": "/star45.png",
         "img": "/wine1.png"
     },
     {
         "tag": ["wine"],
         "review": "DigitalSunset",
         "name": "ValleyBreeze Pinot Noir",
-        "rating": 5,
+        "rating": "/star5.png",
         "img": "/wine2.png"
     },
     {
         "tag": ["wine"],
         "review": "Sunflower E-Shop",
         "name": "GoldenHills Chardonnay",
-        "rating": 3,
+        "rating": "/star3.png",
         "img": "/wine3.png"
     }
 ]

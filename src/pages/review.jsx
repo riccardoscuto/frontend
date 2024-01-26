@@ -42,9 +42,15 @@ export default function Review() {
                                             <Heading>{element.review}</Heading>
                                             <Heading size='md'>Product Name: </Heading>
                                             <Text color="#505423">{element.name}</Text>
-                                            <Heading size='md'>Rating: {element.rating}/5</Heading>
-
                                             <Text color='blue.600' fontSize='2xl'></Text>
+                                            
+                                            <Heading size='md'> Rating:<Image width={250} height={50}
+                                            src={element.rating}
+                                            alt='Immagine'
+                                            
+                                            borderRadius='lg'
+                                        />
+                                        </Heading>
                                         </Stack>
                                     </CardBody>
                                 </Card>
